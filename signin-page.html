@@ -1,0 +1,552 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #EFE8D9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 320px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 2px solid #382A21;
+        }
+
+        h2 {
+            color: #382A21;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #382A21;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #DF2614;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .otp-section {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-box">
+        <h2>Login with OTP</h2>
+
+      
+        <div id="phone-section">
+            <input type="text" id="phone" placeholder="Enter Phone Number">
+            <button onclick="sendOtp()">Send OTP</button>
+        </div>
+
+      
+        <div id="otp-section" class="otp-section">
+            <input type="text" id="otp" placeholder="Enter OTP">
+            <button onclick="verifyOtp()">Verify OTP</button>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
+
+        function sendOtp() {
+            const phone = document.getElementById("phone").value;
+
+            if (!phone) {
+                alert("Please enter a phone number");
+                return;
+            }
+
+            fetch(`${BASE_URL}/customer/send-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Send OTP Response:", data);
+                    alert("OTP sent!");
+
+                    // Show OTP input section
+                    document.getElementById("phone-section").style.display = "none";
+                    document.getElementById("otp-section").style.display = "block";
+
+                    // Store userId if returned (optional)
+                    console.log("🚀 ~ sendOtp ~ data.userId:", data.data.userId)
+                    if (data.data.userId) {
+                        localStorage.setItem("pfm_userId", data.data.userId);
+                        console.log("🚀 ~ sendOtp ~  data.data.userId:", data.data.userId)
+                    }
+                })
+                .catch(err => console.error("Error:", err));
+        }
+
+        function verifyOtp() {
+            const phone = document.getElementById("phone").value;
+            const otp = document.getElementById("otp").value;
+            const userId = localStorage.getItem("pfm_userId");
+            console.log("🚀 ~ verifyOtp ~ userId:", userId)
+
+            if (!otp) {
+                alert("Please enter OTP");
+                return;
+            }
+
+            fetch(`${BASE_URL}/customer/verify-login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone, otp, userId })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Verify OTP Response:", data);
+
+                    if (data.success || data.token) {
+                        // Store token locally
+                        localStorage.setItem("authToken", data.token || "dummy-token");
+                        alert("Login Successful!");
+                        window.location.href = "index.html"; // redirect
+                    } else {
+                        alert("Invalid OTP");
+                    }
+                })
+                .catch(err => console.error("Error:", err));
+        }
+    </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Login | Priya Fresh Meats</title>
+    <style>
+        :root {
+            --primary: #DF2614;
+            --primary-dark: #B81E10;
+            --secondary: #382A21;
+            --light-bg: #EFE8D9;
+            --white: #FFFFFF;
+            --gray-light: #F5F5F5;
+            --gray: #E0E0E0;
+            --gray-dark: #757575;
+            --success: #4CAF50;
+            --error: #F44336;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: linear-gradient(135deg, var(--light-bg) 0%, #f9f5eb 100%);
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            perspective: 1000px;
+        }
+
+        .login-box {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid rgba(56, 42, 33, 0.1);
+            transform-style: preserve-3d;
+            transition: var(--transition);
+        }
+
+        .login-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            color: var(--secondary);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: var(--gray-dark);
+            font-size: 14px;
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 22px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+            background-color: var(--gray-light);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(223, 38, 20, 0.1);
+            background-color: var(--white);
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(223, 38, 20, 0.2);
+        }
+
+        button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(223, 38, 20, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .otp-section {
+            display: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .countdown {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--gray-dark);
+        }
+
+        .resend-otp {
+            color: var(--primary);
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 14px;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .resend-otp:hover {
+            text-decoration: underline;
+        }
+
+        .resend-otp.disabled {
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .message.success {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .message.error {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid var(--white);
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .step.active {
+            background-color: var(--primary);
+        }
+
+        .step.completed {
+            background-color: var(--success);
+        }
+
+        .step-line {
+            width: 40px;
+            height: 2px;
+            background-color: var(--gray);
+            margin-top: 14px;
+            transition: var(--transition);
+        }
+
+        .step-line.active {
+            background-color: var(--primary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">
+                <h1>Priya Fresh Meats</h1>
+                <p>Quality you can trust</p>
+            </div>
+
+            <div class="step-indicator">
+                <div class="step active">1</div>
+                <div class="step-line"></div>
+                <div class="step">2</div>
+            </div>
+
+            <h2>Login with OTP</h2>
+
+            <div class="message" id="message"></div>
+
+            <!-- Step 1: Phone Input -->
+            <div id="phone-section">
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your 10-digit phone number" maxlength="10">
+                </div>
+                <button id="send-otp-btn" onclick="sendOtp()">
+                    <span id="send-otp-text">Send OTP</span>
+                    <div class="loader" id="send-otp-loader"></div>
+                </button>
+            </div>
+
+            <!-- Step 2: OTP Input -->
+            <div id="otp-section" class="otp-section">
+                <div class="input-group">
+                    <label for="otp">Enter OTP</label>
+                    <input type="text" id="otp" placeholder="Enter 4-digit OTP" maxlength="4">
+                </div>
+                <div class="countdown" id="countdown">OTP expires in: <span id="timer">02:00</span></div>
+                <button id="verify-otp-btn" onclick="verifyOtp()">
+                    <span id="verify-otp-text">Verify OTP</span>
+                    <div class="loader" id="verify-otp-loader"></div>
+                </button>
+                <div class="resend-otp disabled" id="resend-otp">Resend OTP</div>
+                <div class="back-link" onclick="goBackToPhone()">← Back to phone number</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
+
+        function sendOtp() {
+            const phone = document.getElementById("phone").value;
+
+            if (!phone) {
+                alert("Please enter a phone number");
+                return;
+            }
+
+            fetch(`${BASE_URL}/customer/send-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Send OTP Response:", data);
+                    alert("OTP sent!");
+
+                    // Show OTP input section
+                    document.getElementById("phone-section").style.display = "none";
+                    document.getElementById("otp-section").style.display = "block";
+
+                    // Store userId if returned (optional)
+                    console.log("🚀 ~ sendOtp ~ data.userId:", data.data.userId)
+                    if (data.data.userId) {
+                        localStorage.setItem("pfm_userId", data.data.userId);
+                        console.log("🚀 ~ sendOtp ~  data.data.userId:", data.data.userId)
+                    }
+                })
+                .catch(err => console.error("Error:", err));
+        }
+
+        function verifyOtp() {
+            const phone = document.getElementById("phone").value;
+            const otp = document.getElementById("otp").value;
+            const userId = localStorage.getItem("pfm_userId");
+            console.log("🚀 ~ verifyOtp ~ userId:", userId)
+
+            if (!otp) {
+                alert("Please enter OTP");
+                return;
+            }
+
+            fetch(`${BASE_URL}/customer/verify-login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone, otp, userId })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Verify OTP Response:", data);
+
+                    if (data.success || data.token) {
+                        // Store token locally
+                        localStorage.setItem("authToken", data.token || "dummy-token");
+                        alert("Login Successful!");
+                        window.location.href = "index.html"; // redirect
+                    } else {
+                        alert("Invalid OTP");
+                    }
+                })
+                .catch(err => console.error("Error:", err));
+        }
+    </script>
+</body>
+
+</html>
