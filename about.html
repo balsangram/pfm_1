@@ -189,7 +189,7 @@
                                         <li class="header-shop-cart">
                                             <a href="#">
                                                 <i class="flaticon-shopping-basket"></i>
-                                                <span>0</span>
+                                                <span id="cart-count">0</span>
                                             </a>
                                         </li>
                                         <li class="header-btn"><a href="tel:0123456789" class="btn">+91 9686068687</a>
@@ -600,8 +600,17 @@
                                         <li><a href="contact.html">How to Order</a></li>
                                         <li><a href="contact.html">Delivery Info</a></li>
                                         <li><a href="contact.html">FAQs</a></li>
-                                        <li><a href="contact.html">Terms</a></li>
-                                        <li><a href="contact.html">Privacy Policy</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/terms-and-condition">Terms &
+                                                Conditions</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/privacy-policy">Privacy
+                                                Policy</a></li>
+                                        <li><a
+                                                href="https://admin.priyafreshmeats.com/delivery-partner/terms-and-condition">Delivery
+                                                Partner Terms & Conditions</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/delivery-partner/privacy-policy">Delivery
+                                                Partner Privacy Policy</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/delete-account">Delete
+                                                Account</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -673,6 +682,118 @@
     <script src="assets/js/ajax-form.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
+
 </body>
+<script>
+    const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
+
+    // Load cart count
+    function loadCartCount() {
+        const customerId = localStorage.getItem('pfm_userId') || '0';
+        const authToken = localStorage.getItem('pfm_authToken') || '';
+        const cartCountElement = document.getElementById("cart-count");
+
+        cartCountElement.textContent = '0';
+
+        if (customerId === '0' || !authToken) return;
+
+        fetch(`${BASE_URL}/customer/cart/${customerId}`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        })
+            .then(res => res.json())
+            .then(data => {
+                const cartItems = data.data || [];
+                cartCountElement.textContent = cartItems.length.toString();
+            })
+            .catch(err => {
+                console.error("Error fetching cart count:", err);
+                cartCountElement.textContent = '0';
+            });
+    }
+
+    function checkAuth() {
+        const userId = localStorage.getItem("pfm_userId");
+        if (!userId) {
+            window.location.href = "signin-page.html";
+            return false;
+        }
+        return true;
+    }
+
+    function searchItem() {
+        if (!checkAuth()) return;
+
+        const name = document.getElementById("searchInput").value.trim();
+        if (!name) {
+            alert("Please enter something to search");
+            return;
+        }
+
+        fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("Search Result:", data);
+                const resultContainer = document.getElementById("result");
+                if (data.success && data.data && data.data.length > 0) {
+                    resultContainer.innerHTML = data.data.map(item => `
+                <div class="search-item">
+                    <h5>${item.name}</h5>
+                    <p>Price: ₹${(item.discountPrice || item.price).toFixed(2)}</p>
+                </div>
+            `).join('');
+                } else {
+                    resultContainer.innerHTML = "<p>No items found.</p>";
+                }
+            })
+            .catch(err => console.error("Error searching items:", err));
+    }
+    function loadBestSellingProducts() {
+        if (!checkAuth()) return;
+
+        const userId = localStorage.getItem("pfm_userId");
+
+        fetch(`${BASE_URL}/customer/bestSellingProducts/user/${userId}`)
+            .then(res => res.json())
+            .then(response => {
+                console.log("Best Selling Products Response:", response);
+                const container = document.querySelector('.product-area-two .row.justify-content-center');
+                if (response.success && response.data && response.data.length > 0 && container) {
+                    container.innerHTML = '';
+                    const products = response.data.slice(0, 4);
+                    products.forEach(product => {
+                        const colDiv = document.createElement('div');
+                        colDiv.className = 'col-lg-6 col-md-10';
+                        colDiv.innerHTML = `
+                    <div class="product-item-two">
+                        <div class="product-img-two">
+                            <a href="shop-details.html">
+                                <img src="${product.img}" alt="${product.name}" style="height: 12rem; width: 100%; object-fit: cover;">
+                            </a>
+                        </div>
+                        <div class="product-content-two">
+                            <div class="product-info">
+                                <h4 class="title"><a href="shop-details.html">${product.name}</a></h4>
+                                <p>${product.description || 'Fresh and organic product, perfect for your meals.'}</p>
+                            </div>
+                            <div class="product-price">
+                                <h5 class="price">₹${(product.discountPrice || product.price).toFixed(2)}</h5>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                        container.appendChild(colDiv);
+                    });
+                } else {
+                    console.warn("No best-selling products found or API error");
+                    if (container) container.innerHTML = '<p>No products found.</p>';
+                }
+            })
+            .catch(err => console.error("Error fetching best-selling products:", err));
+    }
+    window.addEventListener('load', () => {
+        loadBestSellingProducts();
+        loadCartCount();
+    });
+</script>
 
 </html>

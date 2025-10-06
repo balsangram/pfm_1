@@ -1,16 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Bemet - Butcher & Meat Shop HTML Template</title>
-    <meta name="description" content="Bemet - Butcher & Meat Shop HTML Template">
+    <title>Priya Fresh Meats - Shop</title>
+    <meta name="description" content="Priya Fresh Meats - Butcher & Meat Shop">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img//logo/pfm-logo2 (1)2.png">
-    <!-- Place favicon.ico in the root directory -->
-
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/pfm-logo2 (1)2.png">
     <!-- CSS here -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -23,10 +21,70 @@
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <style>
+        /* Custom styling for selected category label */
+        .form-check-input:checked+.form-check-label {
+            color: #ef4444 !important;
+            /* Red color for selected label */
+        }
+
+        /* Hide Latest Products and Best Products on tablet and mobile */
+        @media (max-width: 991.98px) {
+
+            .latest-widget,
+            .best-widget {
+                display: none !important;
+            }
+        }
+
+        /* Ensure responsive behavior for sidebar and main content */
+        @media (max-width: 991.98px) {
+            .shop-inner-wrap .row {
+                flex-direction: column-reverse;
+            }
+
+            .shop-sidebar {
+                order: 2;
+                margin-top: 2rem;
+            }
+
+            .shop-cat-list ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 575.98px) {
+            .show-all-section {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .show-all-section button {
+                width: 100%;
+            }
+
+            .shop-cat-item {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            #categoryList {
+                display: none;
+                /* Initially hidden on mobile */
+            }
+
+            #categoryList.show {
+                display: block !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
     <!-- preloader -->
     <div id="preloader">
         <div id="loading-center">
@@ -99,34 +157,10 @@
                                 </div>
                                 <div class="navbar-wrap main-menu d-none d-lg-flex">
                                     <ul class="navigation">
-                                        <li class="menu-item-has-children"><a href="index.html">Home</a>
-                                            <!-- <ul class="sub-menu">
-                                                <li><a href="index.html">Home One</a></li>
-                                                <li><a href="index-2.html">Home Two</a></li>
-                                                <li><a href="index-3.html">Home Three</a></li>
-                                            </ul> -->
-                                        </li>
+                                        <li><a href="index.html">Home</a></li>
                                         <li><a href="about.html">ABOUT US</a></li>
-                                        <li class="active menu-item-has-children"><a href="shop.html">PRODUCTS</a>
-                                            <!-- <ul class="sub-menu">
-                                                <li class="active"><a href="shop.html">Shop One</a></li>
-                                                <li><a href="shop-2.html">Shop Two</a></li>
-                                                <li><a href="shop-details.html">Shop Details</a></li>
-                                            </ul> -->
-                                        </li>
-                                        <!-- <li class="menu-item-has-children"><a href="#">BLOG</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="blog.html">Our Blog</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
-                                        </li> -->
-                                        <li class="menu-item-has-children"><a href="services.html">Our Franchise</a>
-                                            <!-- <ul class="sub-menu">
-                                                <li><a href="services.html">Services Page</a></li>
-                                                <li><a href="services-details.html">Services Details</a></li>
-                                                <li><a href="team-details.html">Team Details</a></li>
-                                            </ul> -->
-                                        </li>
+                                        <li class="active"><a href="shop.html">PRODUCTS</a></li>
+                                        <li><a href="services.html">Our Franchise</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </div>
@@ -136,9 +170,9 @@
                                             <a href="#"><i class="flaticon-search"></i></a>
                                         </li>
                                         <li class="header-shop-cart">
-                                            <a href="#">
+                                            <a href="/cart.html">
                                                 <i class="flaticon-shopping-basket"></i>
-                                                <span>0</span>
+                                                <span id="cart-count">0</span>
                                             </a>
                                         </li>
                                         <li class="header-btn"><a href="tel:0123456789" class="btn">+91 9686068687</a>
@@ -147,8 +181,7 @@
                                 </div>
                             </nav>
                         </div>
-
-                        <!-- Mobile Menu  -->
+                        <!-- Mobile Menu -->
                         <div class="mobile-menu">
                             <nav class="menu-box">
                                 <div class="close-btn"><i class="fas fa-times"></i></div>
@@ -172,12 +205,10 @@
                         </div>
                         <div class="menu-backdrop"></div>
                         <!-- End Mobile Menu -->
-
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- header-search -->
         <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="search-wrap text-center">
@@ -197,14 +228,11 @@
         </div>
         <div class="search-backdrop"></div>
         <!-- header-search-end -->
-
     </header>
     <!-- header-area-end -->
 
-
     <!-- main-area -->
     <main>
-
         <!-- breadcrumb-area -->
         <section class="breadcrumb-area tg-motion-effects breadcrumb-bg"
             data-background="assets/img/pfmImg/contact.png">
@@ -231,165 +259,70 @@
             <div class="container custom-container-five">
                 <div class="shop-inner-wrap">
                     <div class="row">
-                        <div class="col-xl-9 col-lg-8">
+                        <div class="col-xl-9 col-lg-8 col-md-12">
                             <div class="shop-top-wrap">
                                 <div class="row align-items-center">
                                     <div class="col-md-6">
                                         <div class="shop-showing-result">
-                                            <p>Showing 1–09 of 20 results</p>
+                                            <p id="showing-result">Showing 1–09 of 20 results</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="shop-ordering">
-                                            <select name="orderby" class="orderby">
-                                                <option value="Default sorting">Sort by Top Rating</option>
-                                                <option value="Sort by popularity">Sort by popularity</option>
-                                                <option value="Sort by average rating">Sort by average rating</option>
-                                                <option value="Sort by latest">Sort by latest</option>
-                                                <option value="Sort by latest">Sort by latest</option>
-                                            </select>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="shop-item-wrap">
                                 <div class="row" id="subcategoryContainer"></div>
                             </div>
+                            <div class="shop-pagination text-center mt-4">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li class="page-item" id="prevPage">
+                                            <a class="page-link" href="#" id="prevBtn">Previous</a>
+                                        </li>
+                                        <li class="page-item disabled" id="pageInfo">
+                                            <a class="page-link" href="#">Page <span id="currentPageNum">1</span> of
+                                                <span id="totalPagesNum">1</span></a>
+                                        </li>
+                                        <li class="page-item" id="nextPage">
+                                            <a class="page-link" href="#" id="nextBtn">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                        <div class="col-xl-3 col-lg-4">
+                        <div class="col-xl-3 col-lg-4 col-md-12">
                             <div class="shop-sidebar">
-                                <!-- <div class="shop-widget">
-                                    <h4 class="sw-title">FILTER BY</h4>
-                                    <div class="price_filter">
-                                        <div id="slider-range"></div>
-                                        <div class="price_slider_amount">
-                                            <input type="submit" class="btn" value="Filter">
-                                            <span>Price :</span>
-                                            <input type="text" id="amount" name="price" placeholder="Add Your Price" />
-                                        </div>
-                                        <div class="clear-btn">
-                                            <button type="reset"><i class="far fa-trash-alt"></i>Clear all</button>
-                                        </div>
+                                <div class="shop-widget mt-24 bg-white p-6 rounded-xl shadow-md"
+                                    style="margin-top: 6rem;">
+                                    <div class="show-all-section mb-4 flex items-center justify-between">
+                                        <h4
+                                            class="sw-title text-xl font-semibold text-gray-800 border-b-2 border-orange-500 pb-1">
+                                            Category
+                                        </h4>
+                                        <button id="showAllBtn"
+                                            class="mb-4 px-3 py-1.5 bg-red-500 text-white text-xs font-medium rounded hover:bg-red-600 transition duration-200 h-8 flex items-center justify-center">
+                                            Show All
+                                        </button>
                                     </div>
-                                </div> -->
-                                <div class="shop-widget " style="margin-top: 6rem;">
-                                    <h4 class="sw-title">Category</h4>
+                                    <button class="toggle-categories btn btn-outline-secondary mb-2 d-md-none w-100"
+                                        type="button">
+                                        <i class="fas fa-list me-1"></i>Categories
+                                    </button>
                                     <div class="shop-cat-list">
-                                        <ul class="list-wrap">
-                                            <li>
-                                                <div class="shop-cat-item">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="catThree">
-                                                    <label class="form-check-label" for="catThree">Chicken
-                                                        <span>12</span></label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="shop-cat-item">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="catOne">
-                                                    <label class="form-check-label" for="catOne">Fish
-                                                        <span>05</span></label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="shop-cat-item">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="catTwo">
-                                                    <label class="form-check-label" for="catTwo">Mutton
-                                                        <span>07</span></label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="shop-cat-item">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="catTwo">
-                                                    <label class="form-check-label" for="catTwo">Egg
-                                                        <span>04</span></label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="shop-cat-item">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="catTwo">
-                                                    <label class="form-check-label" for="catTwo">Prawns
-                                                        <span>06</span></label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="shop-cat-item">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="catTwo">
-                                                    <label class="form-check-label" for="catTwo">Liver
-                                                        <span>04</span></label>
-                                                </div>
-                                            </li>
+                                        <ul id="categoryList" class="flex flex-col gap-2">
+                                            <!-- Dynamic categories will be loaded here -->
+                                        </ul>
+                                    </div>
+                                </div>
 
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="shop-widget">
-                                    <h4 class="sw-title">Latest Products</h4>
-                                    <div class="latest-products-wrap">
-                                        <div class="lp-item">
-                                            <div class="lp-thumb">
-                                                <a href="shop-details.html"><img
-                                                        src="assets/img/product2/fish-kabab-centre-nagasandra-bangalore-home-delivery-restaurants-oo5ptc-250.webp"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="lp-content">
-                                                <h4 class="title"><a href="shop-details.html">roast fish</a></h4>
-                                                <span class="price">₹199</span>
-                                            </div>
-                                        </div>
-                                        <div class="lp-item">
-                                            <div class="lp-thumb">
-                                                <a href="shop-details.html"><img
-                                                        src="assets/img/product2/fishfry_1024x1024.webp" alt=""></a>
-                                            </div>
-                                            <div class="lp-content">
-                                                <h4 class="title"><a href="shop-details.html">Venison fish</a></h4>
-                                                <span class="price">₹159</span>
-                                            </div>
-                                        </div>
-                                        <div class="lp-item">
-                                            <div class="lp-thumb">
-                                                <a href="shop-details.html"><img
-                                                        src="assets/img/product2/variations-beef-lamp-rack-kebab-grill-with-hot-bbq-sauce-onion-salad_11zon.jpg"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="lp-content">
-                                                <h4 class="title"><a href="shop-details.html">roast chicken</a></h4>
-                                                <span class="price">₹219</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="shop-widget">
+                                <div class="shop-widget latest-widget">
                                     <h4 class="sw-title">Best Products</h4>
-                                    <div class="sidebar-instagram">
-                                        <ul class="list-wrap">
-                                            <li>
-                                                <a href="#"><img src="assets/img/product2/prone.jpeg" alt=""
-                                                        style="height: 100px;"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img src="assets/img/product2/fish.png"
-                                                        style="height: 100px;" alt=""></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img
-                                                        src="assets/img/product2/Fish & Seafood-F-P{roduct.jpeg"
-                                                        style="height: 100px;" alt=""></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img
-                                                        src="assets/img/product2/ChatGPT Image Sep 10, 2025, 10_48_16 AM.png"
-                                                        style="height: 100px;" alt=""></a>
-                                            </li>
-                                        </ul>
+                                    <div class="latest-products-wrap" id="bestProductsWrap">
+                                        <!-- Dynamic products will be injected here -->
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -397,9 +330,9 @@
             </div>
         </section>
         <!-- shop-area-end -->
-
     </main>
 
+    <!-- footer-area -->
     <footer>
         <div class="footer-area">
             <div class="footer-logo-area">
@@ -477,8 +410,17 @@
                                         <li><a href="contact.html">How to Order</a></li>
                                         <li><a href="contact.html">Delivery Info</a></li>
                                         <li><a href="contact.html">FAQs</a></li>
-                                        <li><a href="contact.html">Terms</a></li>
-                                        <li><a href="contact.html">Privacy Policy</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/terms-and-condition">Terms &
+                                                Conditions</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/privacy-policy">Privacy
+                                                Policy</a></li>
+                                        <li><a
+                                                href="https://admin.priyafreshmeats.com/delivery-partner/terms-and-condition">Delivery
+                                                Partner Terms & Conditions</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/delivery-partner/privacy-policy">Delivery
+                                                Partner Privacy Policy</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/delete-account">Delete
+                                                Account</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -523,12 +465,18 @@
                                 Rights Reserved</p>
                         </div>
                     </div>
-
+                    <!-- <div class="col-lg-6 col-md-5"> -->
+                    <!-- <div class="footer-card text-end"> -->
+                    <!-- <img src="assets/img/images/card.png" alt=""> -->
+                    <!-- </div> -->
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
         </div>
     </footer>
+    <!-- footer-area-end -->
+
     <!-- JS here -->
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -544,75 +492,406 @@
     <script src="assets/js/ajax-form.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
-</body>
-<script>
-    const BASE_URL = "https://api.priyafreshmeats.com";
 
-    function loadSubcategories() {
-        fetch(`${BASE_URL}/customer/display-all-subcategory`)
-            .then(res => res.json())
-            .then(response => {
-                console.log("🚀 ~ loadSubcategories ~ response:", response)
-                const data = response.data || response;
-                const container = document.getElementById("subcategoryContainer");
-                container.innerHTML = "";
+    <script>
+        const BASE_URL = "https://api.priyafreshmeats.com";
 
-                data.forEach(item => {
-                    const card = document.createElement("div");
-                    card.className = "col-xl-4 col-md-6";
-                    card.innerHTML = `
-                <div class="product-item-three inner-product-item">
-                    <div class="product-thumb-three">
-                        <img 
-                            src="${item.img || 'assets/img/placeholder.png'}" 
-                            alt="${item.name}" 
-                            style="width:100%; height:200px; object-fit:cover; border-radius:8px;"
-                        />
-                        <span class="batch">New<i class="fas fa-star"></i></span>
-                    </div>
-                    <div class="product-content-three">
-                        <h2 class="title">${item.name || 'N/A'}</h2>
-                        <h2 class="price">₹${item.price || '0'}</h2>
-                        <div class="product-cart-wrap">
-                            <div class="cart-plus-minus" style="display:flex; align-items:center; gap:8px;">
-                                <button class="minus-btn" onclick="decrease(this)" style="width:32px; height:32px; border:none; background:#382A21; color:#fff; font-size:18px; border-radius:4px; cursor:pointer;">-</button>
-                                
-                                <span class="qty-value" style="min-width:30px; text-align:center; font-size:16px; display:inline-block;">1</span>
-                                
-                                <button class="plus-btn" onclick="increase(this)" style="width:32px; height:32px; border:none; background:#382A21; color:#fff; font-size:18px; border-radius:4px; cursor:pointer;">+</button>
+        let allProducts = [];
+        let currentPage = 1;
+        const itemsPerPage = 9;
+
+        // Load cart count
+        function loadCartCount() {
+            const customerId = localStorage.getItem('pfm_userId') || '0';
+            const authToken = localStorage.getItem('pfm_authToken') || '';
+            const cartCountElement = document.getElementById("cart-count");
+
+            // Initialize to 0
+            cartCountElement.textContent = '0';
+
+            if (customerId === '0' || !authToken) {
+                return; // Keep default count of 0 for non-logged-in users
+            }
+
+            fetch(`${BASE_URL}/customer/cart/${customerId}`, {
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    const cartItems = data.data || [];
+                    cartCountElement.textContent = cartItems.length.toString();
+                })
+                .catch(err => {
+                    console.error("Error fetching cart count:", err);
+                    cartCountElement.textContent = '0'; // Fallback to 0 on error
+                });
+        }
+
+        // Load categories dynamically
+        function loadCategories() {
+            fetch(`${BASE_URL}/customer/display-categories-name`)
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then(response => {
+                    console.log("Categories Response:", response);
+                    const categories = response.data || [];
+                    const categoryList = document.getElementById("categoryList");
+                    categoryList.innerHTML = "";
+
+                    if (!Array.isArray(categories) || categories.length === 0) {
+                        categoryList.innerHTML = '<li><p>No categories available.</p></li>';
+                        return;
+                    }
+
+                    categories.forEach(category => {
+                        // Compute count by checking if product name includes category name (case insensitive)
+                        const count = allProducts.filter(product =>
+                            product.name.toLowerCase().includes(category.name.toLowerCase())
+                        ).length;
+
+                        const li = document.createElement("li");
+                        const safeName = category.name.replace(/[^a-zA-Z0-9]/g, ''); // Sanitize for ID
+                        li.innerHTML = `
+                            <div class="shop-cat-item flex items-center gap-2">
+                                <input class="form-check-input" type="radio" name="categoryFilter" value="${category._id}"
+                                    id="cat${safeName}">
+                                <label class="form-check-label cursor-pointer flex-1" for="cat${safeName}">${category.name}
+                                    <span class="ml-2 text-sm text-gray-500" id="cat${safeName}Count">${count}</span>
+                                </label>
                             </div>
+                        `;
+                        categoryList.appendChild(li);
+                    });
+
+                    // Event delegation for category selection
+                    categoryList.addEventListener('change', function (e) {
+                        if (e.target.type === 'radio' && e.target.checked) {
+                            const categoryId = e.target.value;
+                            fetchSubproductsByCategory(categoryId);
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error fetching categories:", err);
+                    document.getElementById("categoryList").innerHTML = '<li><p>Error loading categories. Please try again.</p></li>';
+                });
+        }
+
+        // Fetch subproducts for a specific category
+        function fetchSubproductsByCategory(categoryId) {
+            fetch(`${BASE_URL}/customer/allCategories-subProducts/${categoryId}`)
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then(response => {
+                    console.log("Subproducts for category Response:", response);
+                    allProducts = response.data || [];
+                    currentPage = 1;
+                    renderPage();
+                    updatePagination();
+                })
+                .catch(err => {
+                    console.error("Error fetching subproducts for category:", err);
+                    allProducts = [];
+                    renderPage();
+                    updatePagination();
+                });
+        }
+
+        // Render current page
+        function renderPage() {
+            const container = document.getElementById("subcategoryContainer");
+            container.innerHTML = "";
+
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageProducts = allProducts.slice(start, end);
+
+            const showingResult = document.getElementById("showing-result");
+            showingResult.textContent = `Showing ${start + 1}–${Math.min(end, allProducts.length)} of ${allProducts.length} results`;
+
+            if (pageProducts.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-500 col-12">No products available.</p>';
+                return;
+            }
+
+            // Render products
+            pageProducts.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-4";
+                card.innerHTML = `
+                    <div class="product-item-three inner-product-item">
+                        <div class="product-thumb-three">
+                            <img 
+                                src="${item.img || 'assets/img/placeholder.png'}" 
+                                alt="${item.name || 'Product'}" 
+                                style="width:100%; height:200px; object-fit:cover; border-radius:8px;"
+                            />
+                            <span class="batch">New<i class="fas fa-star"></i></span>
+                        </div>
+                        <div class="product-content-three">
+                            <h2 class="title">${item.name || 'N/A'}</h2>
+                            <h2 class="price">₹${item.price || '0'}</h2>
+                        <div class="product-cart-wrap" style="display:flex; flex-direction:column; gap:6px;">
+
+                          <div class="cart-plus-minus" 
+                               style="display:flex; align-items:center; justify-content:center; gap:10px; background:#f5f5f5; padding:6px 10px; border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+
+                            <button class="minus-btn" onclick="decrease(this)" 
+                                     style="width:32px; height:32px; border:none; background:#382A21; color:#fff; font-size:18px; border-radius:6px; cursor:pointer; transition:0.2s;">
+                                         -
+                               </button>
+
+                            <span class="qty-value" 
+                                  style="min-width:35px; text-align:center; font-size:16px; font-weight:bold; display:inline-block; color:#382A21;">
+                                 ${item.count || 0}
+                          </span>
+
+                         <button class="plus-btn" onclick="increase(this)" 
+                                style="width:32px; height:32px; border:none; background:#382A21; color:#fff; font-size:18px; border-radius:6px; cursor:pointer; transition:0.2s;">
+                                +
+                          </button>
+                         </div>
+
+                          <button class="add-to-cart-btn" data-id="${item._id}" 
+                                    style="padding:8px 16px; background:#ff6b35; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:bold; box-shadow:0 2px 4px rgba(0,0,0,0.1); transition:0.2s;">
+                                        Add to Cart
+                          </button>
+
+                        </div>
+
+                        </div>
+                        <div class="product-shape-two">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 303 445" preserveAspectRatio="none">
+                                <path d="M319,3802H602c5.523,0,10,5.24,10,11.71l-10,421.58c0,6.47-4.477,11.71-10,11.71H329c-5.523,0-10-5.24-10-11.71l-10-421.58C309,3807.24,313.477,3802,319,3802Z" transform="translate(-309 -3802)" />
+                            </svg>
                         </div>
                     </div>
-                    <div class="product-shape-two">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 303 445" preserveAspectRatio="none">
-                            <path d="M319,3802H602c5.523,0,10,5.24,10,11.71l-10,421.58c0,6.47-4.477,11.71-10,11.71H329c-5.523,0-10-5.24-10-11.71l-10-421.58C309,3807.24,313.477,3802,319,3802Z" transform="translate(-309 -3802)" />
-                        </svg>
-                    </div>
-                </div>
                 `;
-                    container.appendChild(card);
+                container.appendChild(card);
+            });
+
+            // Add event listeners for Add to Cart buttons
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const subCategoryId = this.getAttribute('data-id');
+                    const qtySpan = this.parentElement.querySelector('.qty-value');
+                    const quantity = parseInt(qtySpan.textContent);
+                    addToCart(subCategoryId, quantity);
                 });
-            })
-            .catch(err => console.error("Error:", err));
-    }
-
-    function increase(btn) {
-        const span = btn.previousElementSibling;
-        span.textContent = parseInt(span.textContent) + 1;
-    }
-
-    function decrease(btn) {
-        const span = btn.nextElementSibling;
-        if (parseInt(span.textContent) > 1) {
-            span.textContent = parseInt(span.textContent) - 1;
+            });
         }
-    }
 
-    window.onload = loadSubcategories;
-</script>
+        // Update pagination controls
+        function updatePagination() {
+            const totalPages = Math.ceil(allProducts.length / itemsPerPage);
+            document.getElementById('currentPageNum').textContent = currentPage;
+            document.getElementById('totalPagesNum').textContent = totalPages;
 
+            const prevLi = document.getElementById('prevPage');
+            const nextLi = document.getElementById('nextPage');
 
+            if (currentPage === 1) {
+                prevLi.classList.add('disabled');
+            } else {
+                prevLi.classList.remove('disabled');
+            }
 
+            if (currentPage === totalPages || totalPages === 0) {
+                nextLi.classList.add('disabled');
+            } else {
+                nextLi.classList.remove('disabled');
+            }
+        }
 
+        // Load all subcategories
+        function loadSubcategories() {
+            const userId = localStorage.getItem('pfm_userId') || '0';
+            fetch(`${BASE_URL}/customer/display-all-subcategory?userId=${userId}`)
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then(response => {
+                    console.log("Subcategories Response:", response);
+                    allProducts = response.data || response;
+                    currentPage = 1;
+                    renderPage();
+                    updatePagination();
+                    // Load categories after subcategories are loaded to compute counts
+                    loadCategories();
+                })
+                .catch(err => {
+                    console.error("Error fetching subcategories:", err);
+                    document.getElementById("subcategoryContainer").innerHTML = '<p class="text-center text-gray-500 col-12">Error loading products. Please try again.</p>';
+                    document.getElementById("showing-result").textContent = 'Showing 0 of 0 results';
+                    // Still try to load categories
+                    loadCategories();
+                });
+        }
+
+        // Pagination event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('prevBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderPage();
+                    updatePagination();
+                }
+            });
+
+            document.getElementById('nextBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+                const totalPages = Math.ceil(allProducts.length / itemsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderPage();
+                    updatePagination();
+                }
+            });
+
+            // Show All button
+            document.getElementById('showAllBtn').addEventListener('click', function () {
+                // Uncheck all radios
+                document.querySelectorAll('input[name="categoryFilter"]').forEach(radio => {
+                    radio.checked = false;
+                });
+                loadSubcategories();
+            });
+
+            // Mobile category toggle
+            const toggleBtn = document.querySelector('.toggle-categories');
+            const catList = document.getElementById('categoryList');
+            if (toggleBtn && catList) {
+                toggleBtn.addEventListener('click', function () {
+                    catList.classList.toggle('show');
+                });
+            }
+        });
+
+        // Increase quantity
+        function increase(btn) {
+            const span = btn.previousElementSibling;
+            span.textContent = parseInt(span.textContent) + 1;
+        }
+
+        // Decrease quantity
+        function decrease(btn) {
+            const span = btn.nextElementSibling;
+            if (parseInt(span.textContent) > 1) {
+                span.textContent = parseInt(span.textContent) - 1;
+            }
+        }
+
+        // Add to cart
+        function addToCart(subCategoryId, quantity) {
+            const customerId = localStorage.getItem('pfm_userId') || '0';
+            const authToken = localStorage.getItem('pfm_authToken') || '';
+
+            if (customerId === '0' || !authToken) {
+                alert("Please log in to add items to your cart.");
+                window.location.href = 'login.html';
+                return;
+            }
+
+            fetch(`${BASE_URL}/customer/cart/${customerId}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    subCategoryId: subCategoryId,
+                    count: quantity
+                })
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then(() => {
+                    alert("Item added to cart successfully!");
+                    loadCartCount(); // Refresh cart count
+                })
+                .catch(err => {
+                    console.error("Error adding to cart:", err);
+                    alert("Failed to add item to cart. Please try again.");
+                });
+        }
+
+        // Best-selling products
+        function loadBestSellingProducts() {
+            const userId = localStorage.getItem("pfm_userId");
+            console.log("🚀 ~ Page Load ~ userId:", userId);
+
+            if (!userId) {
+                window.location.href = "signin-page.html";
+                return;
+            }
+
+            fetch(`${BASE_URL}/customer/bestSellingProducts/user/${userId}`)
+                .then(res => res.json())
+                .then(response => {
+                    console.log("Best Selling Products Response:", response);
+                    const container = document.getElementById('bestProductsWrap');
+                    if (response.success && response.data && response.data.length > 0 && container) {
+                        container.innerHTML = '';
+                        response.data.forEach(product => {
+                            const productDiv = document.createElement('div');
+                            productDiv.className = 'lp-item';
+                            productDiv.innerHTML = `
+                        <div class="lp-thumb">
+                            <img src="${product.img}" alt="${product.name}" style="height: 5rem; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="lp-content">
+                            <h4 class="title">${product.name}</h4>
+                            <span class="price">₹${(product.discountPrice || product.price).toFixed(2)}</span>
+                        </div>
+                    `;
+                            container.appendChild(productDiv);
+                        });
+                    } else {
+                        console.warn("No best-selling products found or API error");
+                        container.innerHTML = '<p>No products found.</p>';
+                    }
+                })
+                .catch(err => {
+                    console.error("Error fetching best-selling products:", err);
+                });
+        }
+
+        // Other page load functions
+        function loadOtherFunctions() {
+            loadSubcategories();
+            loadCartCount();
+        }
+
+        // Call everything on page load
+        window.addEventListener('load', () => {
+            loadBestSellingProducts();
+            loadOtherFunctions();
+        });
+
+    </script>
+</body>
 
 </html>

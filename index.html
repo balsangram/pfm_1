@@ -149,10 +149,13 @@
                                             <a href="#"><i class="flaticon-search"></i></a>
                                         </li>
                                         <li class="header-shop-cart">
-                                            <a href="#">
+                                            <a id="cart-link" href="/cart.html">
                                                 <i class="flaticon-shopping-basket"></i>
-                                                <span>0</span>
+                                                <span id="cart-count">0</span>
                                             </a>
+                                        </li>
+                                        <li id="auth-li" class="header-auth">
+                                            <a id="auth-btn" href="signin-page.html" class="btn">Login</a>
                                         </li>
                                         <li class="header-btn"><a href="tel:0123456789" class="btn">+91 9686068687</a>
                                         </li>
@@ -199,8 +202,8 @@
                         <div class="col-12">
                             <div class="search-form">
                                 <form action="#">
-                                    <input type="text" placeholder="Enter your keyword...">
-                                    <button class="search-btn"><i class="flaticon-search"></i></button>
+                                    <input id="searchInput" type="text" placeholder="Enter your keyword...">
+                                    <button id="search-btn" class="search-btn"><i class="flaticon-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -396,11 +399,11 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="product-item">
                             <div class="product-img">
-                                <a href="shop-details.html"><img src="assets/img/p/c.png" alt=""></a>
+                                <img src="assets/img/p/c.png" alt="">
                             </div>
                             <div class="product-content">
                                 <!-- <div class="line" data-background="assets/img/p/a.png"></div> -->
-                                <h4 class="title"><a href="shop-details.html"> Salmon fish</a></h4>
+                                <h4 class="title"> Salmon fish</h4>
                                 <h6 class="price">₹699</h6>
                                 <div class="product-tag">
                                     <ul class="list-wrap">
@@ -422,11 +425,11 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="product-item">
                             <div class="product-img">
-                                <a href="shop-details.html"><img src="assets/img/p/a.png" alt=""></a>
+                                <img src="assets/img/p/a.png" alt="">
                             </div>
                             <div class="product-content">
                                 <div class="line" data-background="assets/img/images/line.png"></div>
-                                <h4 class="title"><a href="shop-details.html">roast chicken</a></h4>
+                                <h4 class="title">roast chicken</h4>
                                 <h6 class="price">₹499</h6>
                                 <div class="product-tag">
                                     <ul class="list-wrap">
@@ -448,11 +451,11 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="product-item">
                             <div class="product-img">
-                                <a href="shop-details.html"><img src="assets/img/p/m.png" alt=""></a>
+                                <img src="assets/img/p/m.png" alt="">
                             </div>
                             <div class="product-content">
                                 <div class="line" data-background="assets/img/images/line.png"></div>
-                                <h4 class="title"><a href="shop-details.html">Mutton</a></h4>
+                                <h4 class="title">Mutton</h4>
                                 <h6 class="price">₹899</h6>
                                 <div class="product-tag">
                                     <ul class="list-wrap">
@@ -526,87 +529,7 @@
                 </div>
 
                 <div class="row justify-content-center">
-
-                    <div class="col-lg-6 col-md-10">
-                        <div class="product-item-two">
-                            <div class="product-img-two">
-                                <a href="shop-details.html"><img
-                                        src="assets/img/p/Gemini_Generated_Image_sr9nyhsr9nyhsr9n-removebg-preview.png"
-                                        alt="Chicken Cutlet"></a>
-                            </div>
-                            <div class="product-content-two">
-                                <div class="product-info">
-                                    <h4 class="title"><a href="shop-details.html">Chicken Cutlet</a></h4>
-                                    <p>Fresh and organic chicken cutlets, perfect for your meals.</p>
-                                </div>
-                                <div class="product-price">
-                                    <h5 class="price">₹499</h5>
-                                    <a href="#" class="tag">Organic</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-10">
-                        <div class="product-item-two">
-                            <div class="product-img-two">
-                                <a href="shop-details.html"><img
-                                        src="assets/img/p/Gemini_Generated_Image_1xuaaw1xuaaw1xua-removebg-preview.png"
-                                        alt="Tandoori Chicken"></a>
-                            </div>
-                            <div class="product-content-two">
-                                <div class="product-info">
-                                    <h4 class="title"><a href="shop-details.html">Roast Chicken</a></h4>
-                                    <p>Deliciously seasoned and perfectly roasted organic chicken.</p>
-                                </div>
-                                <div class="product-price">
-                                    <h5 class="price">₹899</h5>
-                                    <a href="#" class="tag">Organic</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-10">
-                        <div class="product-item-two">
-                            <div class="product-img-two">
-                                <a href="shop-details.html"><img
-                                        src="assets/img/p/Screenshot_2025-09-12_132027-removebg-preview.png"
-                                        alt="Chicken Wings"></a>
-                            </div>
-                            <div class="product-content-two">
-                                <div class="product-info">
-                                    <h4 class="title"><a href="shop-details.html">Chicken Wings</a></h4>
-                                    <p>Crispy and spicy chicken wings made from organic chicken.</p>
-                                </div>
-                                <div class="product-price">
-                                    <h5 class="price">₹599</h5>
-                                    <a href="#" class="tag">Organic</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-10">
-                        <div class="product-item-two">
-                            <div class="product-img-two">
-                                <a href="shop-details.html"><img
-                                        src="assets/img/p/Screenshot_2025-09-12_132200-removebg-preview.png"
-                                        alt="Chicken Thighs"></a>
-                            </div>
-                            <div class="product-content-two">
-                                <div class="product-info">
-                                    <h4 class="title"><a href="shop-details.html">Chicken Thighs</a></h4>
-                                    <p>Organic chicken thighs, tender and ready to cook your favorite dish.</p>
-                                </div>
-                                <div class="product-price">
-                                    <h5 class="price">₹699</h5>
-                                    <a href="#" class="tag">Organic</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- Dynamic products will be inserted here -->
                 </div>
 
                 <div class="shop-now-btn text-center mt-40">
@@ -615,71 +538,6 @@
             </div>
         </section>
 
-        <!-- product-area-end -->
-
-        <!-- team-area -->
-        <!-- <section class="team-area team-bg" data-background="assets/img/bg/team_bg.jpg">
-            <div class="container custom-container-two">
-                <div class="row align-items-center">
-                    <div class="col-lg-4">
-                        <div class="team-content-wrap">
-                            <div class="section-title white-title mb-50">
-                                <span class="sub-title">Meet Our Team</span>
-                                <h2 class="title">Our CREATIVE Team</h2>
-                            </div>
-                            <p>BUY SMOKEY GRILLED meats and CHICKEN <span>GET catling</span> FREE</p>
-                            <a href="shop.html" class="btn">Shop Now</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="team-item-wrap">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-4 col-md-6 col-sm-8">
-                                    <div class="team-item">
-                                        <div class="team-thumb">
-                                            <img src="assets/img/team/team_img01.jpg" alt="">
-                                            <a href="team-details.html" class="link-btn"><i class="fas fa-plus"></i></a>
-                                        </div>
-                                        <div class="team-content">
-                                            <div class="line" data-background="assets/img/images/line.png"></div>
-                                            <h4 class="title"><a href="team-details.html">Alaxzender pilot</a></h4>
-                                            <span>stack expert</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-8">
-                                    <div class="team-item">
-                                        <div class="team-thumb">
-                                            <img src="assets/img/team/team_img02.jpg" alt="">
-                                            <a href="team-details.html" class="link-btn"><i class="fas fa-plus"></i></a>
-                                        </div>
-                                        <div class="team-content">
-                                            <div class="line" data-background="assets/img/images/line.png"></div>
-                                            <h4 class="title"><a href="team-details.html">Starlee jonson</a></h4>
-                                            <span>stack expert</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-8">
-                                    <div class="team-item">
-                                        <div class="team-thumb">
-                                            <img src="assets/img/team/team_img03.jpg" alt="">
-                                            <a href="team-details.html" class="link-btn"><i class="fas fa-plus"></i></a>
-                                        </div>
-                                        <div class="team-content">
-                                            <div class="line" data-background="assets/img/images/line.png"></div>
-                                            <h4 class="title"><a href="team-details.html">Alaxzender pilot</a></h4>
-                                            <span>stack expert</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-        <!-- team-area-end -->
 
         <!-- faq-area -->
         <section class="faq-area tg-motion-effects faq-bg" data-background="assets/img/bg/faq_bg.jpg">
@@ -734,21 +592,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                aria-expanded="false" aria-controls="collapseThree">
-                                                Meat is animal flesh food.
-                                            </button>
-                                        </h2>
-                                        <div id="collapseThree" class="accordion-collapse collapse"
-                                            data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <p>Meat provide well shaped fresh and the organic meat well animals is
-                                                    Humans have hunted schistoric times</p>
-                                            </div>
-                                        </div> -->
+
                                 </div>
                             </div>
                         </div>
@@ -761,109 +605,6 @@
                 <img src="assets/img/images/faq_shape02.png" alt="" class="tg-motion-effects2">
             </div>
         </section>
-        <!-- faq-area-end -->
-
-        <!-- cta-area -->
-        <!-- <section class="cta-area position-relative">
-            <div class="cta-bg" data-background="assets/img/bg/cta_bg.jpg"></div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="cta-content">
-                            <img src="assets/img/icons/cta_icon.png" alt="">
-                            <h2 class="title">Get a Free Quote</h2>
-                            <div class="cta-bottom">
-                                <a href="shop.html" class="btn">buy now</a>
-                                <a href="tel:0123456789" class="btn call-btn"><i class="fas fa-headphones-alt"></i>make
-                                    a call</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-        <!-- cta-area-end -->
-
-        <!-- blog-post-area -->
-        <!-- <section class="blog-post-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="section-title text-center mb-70">
-                                <span class="sub-title">Latest News</span>
-                                <h2 class="title">Latest News Update</h2>
-                                <div class="title-shape" data-background="assets/img/images/title_shape.png"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="blog-post-item">
-                                <div class="blog-post-thumb">
-                                    <a href="blog-details.html"><img src="assets/img/blog/blog_post01.jpg" alt=""></a>
-                                </div>
-                                <div class="blog-post-content">
-                                    <div class="blog-meta">
-                                        <ul class="list-wrap">
-                                            <li><a href="blog.html"><i class="fas fa-user"></i>Hamolin Pilot</a></li>
-                                            <li><i class="fas fa-comments"></i>03</li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.html">Hamburg Meat is Animal Flesh Food</a></h4>
-                                    <p>Meat provide well shapd fresh and organic meat well animals is Humans.</p>
-                                    <div class="blog-post-bottom">
-                                        <a href="blog-details.html" class="link-btn">Read More</a>
-                                        <a href="blog-details.html" class="link-arrow"><i class="fas fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="blog-post-item">
-                                <div class="blog-post-thumb">
-                                    <a href="blog-details.html"><img src="assets/img/blog/blog_post02.jpg" alt=""></a>
-                                </div>
-                                <div class="blog-post-content">
-                                    <div class="blog-meta">
-                                        <ul class="list-wrap">
-                                            <li><a href="blog.html"><i class="fas fa-user"></i>Hamolin Pilot</a></li>
-                                            <li><i class="fas fa-comments"></i>03</li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.html">Good Source of Iron And Flesh Food</a></h4>
-                                    <p>Meat provide well shapd fresh and organic meat well animals is Humans.</p>
-                                    <div class="blog-post-bottom">
-                                        <a href="blog-details.html" class="link-btn">Read More</a>
-                                        <a href="blog-details.html" class="link-arrow"><i class="fas fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="blog-post-item">
-                                <div class="blog-post-thumb">
-                                    <a href="blog-details.html"><img src="assets/img/blog/blog_post03.jpg" alt=""></a>
-                                </div>
-                                <div class="blog-post-content">
-                                    <div class="blog-meta">
-                                        <ul class="list-wrap">
-                                            <li><a href="blog.html"><i class="fas fa-user"></i>Hamolin Pilot</a></li>
-                                            <li><i class="fas fa-comments"></i>03</li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.html">Chicken Sausage For Sale Humanely Raised</a></h4>
-                                    <p>Meat provide well shapd fresh and organic meat well animals is Humans.</p>
-                                    <div class="blog-post-bottom">
-                                        <a href="blog-details.html" class="link-btn">Read More</a>
-                                        <a href="blog-details.html" class="link-arrow"><i class="fas fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> -->
-        <!-- blog-post-area-end -->
 
     </main>
     <!-- main-area-end -->
@@ -946,8 +687,17 @@
                                         <li><a href="contact.html">How to Order</a></li>
                                         <li><a href="contact.html">Delivery Info</a></li>
                                         <li><a href="contact.html">FAQs</a></li>
-                                        <li><a href="contact.html">Terms</a></li>
-                                        <li><a href="contact.html">Privacy Policy</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/terms-and-condition">Terms &
+                                                Conditions</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/privacy-policy">Privacy
+                                                Policy</a></li>
+                                        <li><a
+                                                href="https://admin.priyafreshmeats.com/delivery-partner/terms-and-condition">Delivery
+                                                Partner Terms & Conditions</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/delivery-partner/privacy-policy">Delivery
+                                                Partner Privacy Policy</a></li>
+                                        <li><a href="https://admin.priyafreshmeats.com/delete-account">Delete
+                                                Account</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1024,50 +774,173 @@
 <script>
     const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
 
-    // ✅ Check login on page load
-    window.onload = function () {
-        const userId = localStorage.getItem("pfm_userId");
-        console.log("🚀 ~ Page Load ~ userId:", userId);
+    // Load cart count
+    function loadCartCount() {
+        const customerId = localStorage.getItem('pfm_userId') || '0';
+        const authToken = localStorage.getItem('pfm_authToken') || '';
+        const cartCountElement = document.getElementById("cart-count");
 
-        if (!userId) {
-            // Redirect if user is not logged in
-            window.location.href = "signin-page.html";
-        }
-    };
+        cartCountElement.textContent = '0';
 
-    // ✅ Function to check before search (optional backup)
-    function checkAuth() {
-        const userId = localStorage.getItem("pfm_userId");
-        console.log("🚀 ~ checkAuth ~ userId:", userId);
+        if (customerId === '0' || !authToken) return;
 
-        if (!userId) {
-            window.location.href = "signin-page.html";
-            return false;
-        }
-        return true;
+        fetch(`${BASE_URL}/customer/cart/${customerId}`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        })
+            .then(res => res.json())
+            .then(data => {
+                const cartItems = data.data || [];
+                cartCountElement.textContent = cartItems.length.toString();
+            })
+            .catch(err => {
+                console.error("Error fetching cart count:", err);
+                cartCountElement.textContent = '0';
+            });
     }
 
-    // ✅ Search function
+    // Check if user is logged in
+    function checkAuth() {
+        const userId = localStorage.getItem("pfm_userId");
+        return !!userId;
+    }
+
+    // Update auth button
+    function updateAuthButton() {
+        const userId = localStorage.getItem('pfm_userId');
+        const authToken = localStorage.getItem('pfm_authToken');
+        const authBtn = document.getElementById('auth-btn');
+
+        if (userId && authToken) {
+            authBtn.textContent = 'Logout';
+            authBtn.href = '#';
+            authBtn.onclick = function (e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    localStorage.removeItem('pfm_userId');
+                    localStorage.removeItem('pfm_authToken');
+                    location.reload();
+                }
+            };
+        } else {
+            authBtn.textContent = 'Login';
+            authBtn.href = 'signin-page.html';
+            authBtn.onclick = null;
+        }
+    }
+
+    function loadBestSellingProducts() {
+        console.log("🚀 ~ loadBestSellingProducts ~ called");
+        const userId = localStorage.getItem("pfm_userId");
+
+        fetch(`${BASE_URL}/customer/bestSellingProducts?userId=${userId}`)
+            .then(res => res.json())
+            .then(response => {
+                console.log("Best Selling Products Response:========", response);
+                const container = document.querySelector('.product-area-two .row.justify-content-center');
+
+                if (response && Array.isArray(response) && response.length > 0 && container) {
+                    container.innerHTML = ''; // clear previous content
+                    const products = response.slice(0, 4); // show top 4
+
+                    products.forEach(product => {
+                        const colDiv = document.createElement('div');
+                        colDiv.className = 'col-lg-6 col-md-10';
+                        colDiv.innerHTML = `
+                        <div class="product-item-two">
+                            <div class="product-img-two">
+                                <img src="${product.img}" alt="${product.name}" style="height: 12rem; width: 100%; object-fit: cover;">
+                            </div>
+                            <div class="product-content-two">
+                                <div class="product-info">
+                                    <h4 class="title">${product.name}</h4>
+                                    <p>${product.description || 'Fresh and organic product, perfect for your meals.'}</p>
+                                </div>
+                                <div class="product-price">
+                                    <h5 class="price">₹${(product.discountPrice || product.price).toFixed(2)}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                        container.appendChild(colDiv);
+                    });
+                } else {
+                    console.warn("No best-selling products found");
+                    if (container) container.innerHTML = '<p>No products found.</p>';
+                }
+            })
+            .catch(err => console.error("Error fetching best-selling products:", err));
+    }
+
+    // Call this function when page loads
+    window.addEventListener('load', () => {
+        loadBestSellingProducts();
+    });
+    // Search function
     function searchItem() {
-        if (!checkAuth()) return; // extra safety
+        if (!checkAuth()) {
+            window.location.href = "signin-page.html";
+            return;
+        }
 
-        const name = document.getElementById("searchInput").value;
-
+        const name = document.getElementById("searchInput").value.trim();
         if (!name) {
             alert("Please enter something to search");
             return;
         }
 
-        fetch(`${BASE_URL}/customer/search-item?name=${name}`)
+        fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
             .then(res => res.json())
             .then(data => {
                 console.log("Search Result:", data);
-                document.getElementById("result").innerHTML =
-                    JSON.stringify(data, null, 2);
+                const resultContainer = document.getElementById("result");
+                if (data.success && data.data && data.data.length > 0) {
+                    resultContainer.innerHTML = data.data.map(item => `
+                <div class="search-item">
+                    <h5>${item.name}</h5>
+                    <p>Price: ₹${(item.discountPrice || item.price).toFixed(2)}</p>
+                </div>
+            `).join('');
+                } else {
+                    resultContainer.innerHTML = "<p>No items found.</p>";
+                }
             })
-            .catch(err => console.error("Error:", err));
+            .catch(err => console.error("Error searching items:", err));
     }
+
+    // Cart link handler
+    function setupCartLink() {
+        const cartLink = document.getElementById('cart-link');
+        if (cartLink) {
+            cartLink.addEventListener('click', function (e) {
+                if (!checkAuth()) {
+                    e.preventDefault();
+                    window.location.href = "signin-page.html";
+                }
+            });
+        }
+    }
+
+    // Search button handler
+    function setupSearch() {
+        const searchBtn = document.getElementById('search-btn');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                searchItem();
+            });
+        }
+    }
+
+    // Run on page load
+    window.addEventListener('load', () => {
+        loadCartCount();
+        updateAuthButton();
+        loadBestSellingProducts();
+        setupCartLink();
+        setupSearch();
+    });
 </script>
+
 
 
 </html>
