@@ -170,10 +170,13 @@
                                             <a href="#"><i class="flaticon-search"></i></a>
                                         </li>
                                         <li class="header-shop-cart">
-                                            <a href="/cart.html">
+                                            <a id="cart-link" href="/cart.html">
                                                 <i class="flaticon-shopping-basket"></i>
                                                 <span id="cart-count">0</span>
                                             </a>
+                                        </li>
+                                        <li id="auth-li" class="header-auth">
+                                            <a id="auth-btn" href="signin-page.html" class="btn">Login</a>
                                         </li>
                                         <li class="header-btn"><a href="tel:0123456789" class="btn">+91 9686068687</a>
                                         </li>
@@ -228,6 +231,30 @@
         </div>
         <div class="search-backdrop"></div>
         <!-- header-search-end -->
+
+        <!-- header-search -->
+        <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="search-wrap text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="search-form">
+                                <form id="searchForm">
+                                    <input type="text" id="searchInput" placeholder="Enter your keyword...">
+                                    <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
+                                </form>
+                            </div>
+                            <div id="result"
+                                style="margin-top: 20px; color: white; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-backdrop"></div>
+        <!-- header-search-end -->
+
     </header>
     <!-- header-area-end -->
 
@@ -358,10 +385,12 @@
                             <li class="order-lg-3">
                                 <div class="footer-newsletter">
                                     <h4 class="title">Our Newsletter</h4>
-                                    <form action="#">
-                                        <input type="email" placeholder="Enter your email...">
-                                        <button type="submit">subscribe</button>
+                                    <form id="newsletterForm">
+                                        <input type="email" placeholder="Enter your email..." required>
+                                        <button type="submit">Subscribe</button>
                                     </form>
+                                    <p id="newsletterMessage" style="margin-top:8px; color:green; display:none;">
+                                        Submitted!</p>
                                 </div>
                             </li>
                         </ul>
@@ -496,6 +525,21 @@
     <script>
         const BASE_URL = "https://api.priyafreshmeats.com";
 
+        const newsletterForm = document.getElementById("newsletterForm");
+        const newsletterMessage = document.getElementById("newsletterMessage");
+
+        newsletterForm.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            // Here you could also send the email via fetch/AJAX if needed
+            const email = newsletterForm.querySelector('input[type="email"]').value;
+            if (email) {
+                newsletterMessage.style.display = "block"; // Show submitted message
+                newsletterForm.reset(); // Clear input
+            }
+        });
+
+
         let allProducts = [];
         let currentPage = 1;
         const itemsPerPage = 9;
@@ -506,32 +550,71 @@
             const authToken = localStorage.getItem('pfm_authToken') || '';
             const cartCountElement = document.getElementById("cart-count");
 
-            // Initialize to 0
             cartCountElement.textContent = '0';
 
-            if (customerId === '0' || !authToken) {
-                return; // Keep default count of 0 for non-logged-in users
-            }
+            if (customerId === '0' || !authToken) return;
 
             fetch(`${BASE_URL}/customer/cart/${customerId}`, {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`
-                }
+                headers: { 'Authorization': `Bearer ${authToken}` }
             })
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error(`HTTP error! status: ${res.status}`);
-                    }
-                    return res.json();
-                })
+                .then(res => res.json())
                 .then(data => {
                     const cartItems = data.data || [];
                     cartCountElement.textContent = cartItems.length.toString();
                 })
                 .catch(err => {
                     console.error("Error fetching cart count:", err);
-                    cartCountElement.textContent = '0'; // Fallback to 0 on error
+                    cartCountElement.textContent = '0';
                 });
+        }
+
+        // Check if user is logged in
+        function checkAuth() {
+            const userId = localStorage.getItem("pfm_userId");
+            return !!userId;
+        }
+
+        // Update auth button
+        function updateAuthButton() {
+            const userId = localStorage.getItem('pfm_userId');
+            const authToken = localStorage.getItem('pfm_authToken');
+            const authBtn = document.getElementById('auth-btn');
+
+            if (userId && authToken) {
+                authBtn.textContent = 'Logout';
+                authBtn.href = '#';
+                authBtn.onclick = function (e) {
+                    e.preventDefault();
+                    if (confirm('Are you sure you want to logout?')) {
+                        localStorage.removeItem('pfm_userId');
+                        localStorage.removeItem('pfm_authToken');
+                        location.reload();
+                    }
+                };
+            } else {
+                authBtn.textContent = 'Login';
+                authBtn.href = 'signin-page.html';
+                authBtn.onclick = null;
+            }
+        }
+
+        // Cart link handler
+        function setupCartLink() {
+            const cartLink = document.getElementById('cart-link');
+            if (cartLink) {
+                cartLink.addEventListener('click', function (e) {
+                    if (!checkAuth()) {
+                        e.preventDefault();
+                        window.location.href = "signin-page.html";
+                    }
+                });
+            }
+        }
+
+        function isLoggedIn() {
+            const customerId = localStorage.getItem("pfm_userId");
+            const authToken = localStorage.getItem("pfm_authToken");
+            return customerId && customerId !== '0' && authToken;
         }
 
         // Load categories dynamically
@@ -567,7 +650,7 @@
                                 <input class="form-check-input" type="radio" name="categoryFilter" value="${category._id}"
                                     id="cat${safeName}">
                                 <label class="form-check-label cursor-pointer flex-1" for="cat${safeName}">${category.name}
-                                    <span class="ml-2 text-sm text-gray-500" id="cat${safeName}Count">${count}</span>
+                                    <span class="ml-2 text-sm text-gray-500" id="cat${safeName}Count"></span>
                                 </label>
                             </div>
                         `;
@@ -656,10 +739,10 @@
                                          -
                                </button>
 
-                            <span class="qty-value" 
-                                  style="min-width:35px; text-align:center; font-size:16px; font-weight:bold; display:inline-block; color:#382A21;">
-                                 ${item.count || 0}
-                          </span>
+                          <span class="qty-value" 
+                            style="min-width:35px; text-align:center; font-size:16px; font-weight:bold; color:#382A21;">
+                            ${isLoggedIn ? (item.count || 0) : 0}
+                        </span>
 
                          <button class="plus-btn" onclick="increase(this)" 
                                 style="width:32px; height:32px; border:none; background:#382A21; color:#fff; font-size:18px; border-radius:6px; cursor:pointer; transition:0.2s;">
@@ -720,8 +803,14 @@
 
         // Load all subcategories
         function loadSubcategories() {
-            const userId = localStorage.getItem('pfm_userId') || '0';
-            fetch(`${BASE_URL}/customer/display-all-subcategory?userId=${userId}`)
+            const userId = localStorage.getItem("pfm_userId") || ""; // get user ID if available
+            let url = `${BASE_URL}/customer/display-all-subcategory`;
+
+            if (userId) {
+                url += `?userId=${userId}`; // append userId if available
+            }
+
+            fetch(url)
                 .then(res => {
                     if (!res.ok) {
                         throw new Error(`HTTP error! status: ${res.status}`);
@@ -730,17 +819,24 @@
                 })
                 .then(response => {
                     console.log("Subcategories Response:", response);
+
+                    // If API returns { success, data } structure
                     allProducts = response.data || response;
                     currentPage = 1;
+
                     renderPage();
                     updatePagination();
+
                     // Load categories after subcategories are loaded to compute counts
                     loadCategories();
                 })
                 .catch(err => {
                     console.error("Error fetching subcategories:", err);
-                    document.getElementById("subcategoryContainer").innerHTML = '<p class="text-center text-gray-500 col-12">Error loading products. Please try again.</p>';
+
+                    document.getElementById("subcategoryContainer").innerHTML =
+                        '<p class="text-center text-gray-500 col-12">Error loading products. Please try again.</p>';
                     document.getElementById("showing-result").textContent = 'Showing 0 of 0 results';
+
                     // Still try to load categories
                     loadCategories();
                 });
@@ -788,16 +884,23 @@
 
         // Increase quantity
         function increase(btn) {
-            const span = btn.previousElementSibling;
-            span.textContent = parseInt(span.textContent) + 1;
+            if (!isLoggedIn()) {
+                window.location.href = "signin-page.html";
+                return;
+            }
+            let qtySpan = btn.parentElement.querySelector('.qty-value');
+            qtySpan.textContent = parseInt(qtySpan.textContent) + 1;
         }
 
         // Decrease quantity
         function decrease(btn) {
-            const span = btn.nextElementSibling;
-            if (parseInt(span.textContent) > 1) {
-                span.textContent = parseInt(span.textContent) - 1;
+            if (!isLoggedIn()) {
+                window.location.href = "signin-page.html";
+                return;
             }
+            let qtySpan = btn.parentElement.querySelector('.qty-value');
+            let current = parseInt(qtySpan.textContent);
+            if (current > 0) qtySpan.textContent = current - 1;
         }
 
         // Add to cart
@@ -806,8 +909,7 @@
             const authToken = localStorage.getItem('pfm_authToken') || '';
 
             if (customerId === '0' || !authToken) {
-                alert("Please log in to add items to your cart.");
-                window.location.href = 'login.html';
+                window.location.href = 'signin-page.html';
                 return;
             }
 
@@ -838,17 +940,100 @@
                 });
         }
 
-        // Best-selling products
-        function loadBestSellingProducts() {
-            const userId = localStorage.getItem("pfm_userId");
-            console.log("🚀 ~ Page Load ~ userId:", userId);
+        function searchItem() {
+            if (!checkAuth()) return;
 
-            if (!userId) {
-                window.location.href = "signin-page.html";
+            const name = document.getElementById("searchInput").value.trim();
+            if (!name) {
+                alert("Please enter something to search");
                 return;
             }
 
-            fetch(`${BASE_URL}/customer/bestSellingProducts/user/${userId}`)
+            fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Search Result:", data);
+                    const resultContainer = document.getElementById("result");
+
+                    // Clear previous results
+                    resultContainer.innerHTML = "";
+
+                    // Set white background and scrollable container
+                    resultContainer.style.cssText = `
+                max-height: 400px;
+                overflow-y: auto;
+                background: #EFE8D9;
+                border-radius: 8px;
+                padding: 10px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            `;
+
+                    if (data.success && data.data && data.data.length > 0) {
+                        data.data.forEach(item => {
+                            const div = document.createElement("div");
+                            div.className = "search-item-card";
+                            div.style.cssText = `
+                        display: flex; 
+                        align-items: center; 
+                        padding: 10px; 
+                        margin-bottom: 8px; 
+                        border-radius: 6px; 
+                        background: #f9f9f9; 
+                        transition: transform 0.2s, background 0.2s;
+                        cursor: pointer;
+                    `;
+
+                            div.onmouseover = () => {
+                                div.style.background = "#f1f1f1";
+                                div.style.transform = "translateY(-2px)";
+                            };
+                            div.onmouseout = () => {
+                                div.style.background = "#f9f9f9";
+                                div.style.transform = "translateY(0)";
+                            };
+
+                            div.innerHTML = `
+                        <img src="${item.img || 'assets/img/placeholder.png'}" alt="${item.name}" 
+                             style="width: 50px; height: 50px; object-fit: cover; margin-right: 12px; border-radius: 4px; border: 1px solid #ddd;">
+                        <div style="flex: 1;">
+                            <h5 style="margin: 0; color: #333; font-weight: 600;">
+                                <a href="shop-details.html?id=${item.id}" style="color: #333; text-decoration: none;">
+                                    ${item.name}
+                                </a>
+                            </h5>
+                            <p style="margin: 4px 0 0 0; color: #555; font-size: 14px;">
+                                Price: ₹${(item.discountPrice || item.price).toFixed(2)}
+                            </p>
+                        </div>
+                    `;
+
+                            resultContainer.appendChild(div);
+                        });
+                    } else {
+                        resultContainer.innerHTML = `
+                    <p style="color: #333; text-align: center; margin-top: 20px;">
+                        No items found.
+                    </p>
+                `;
+                    }
+                })
+                .catch(err => console.error("Error searching items:", err));
+        }
+
+        // Attach event listener to the search form
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchForm = document.getElementById('searchForm');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    searchItem();
+                });
+            }
+        });
+
+        // Best-selling products
+        function loadBestSellingProducts() {
+            fetch(`${BASE_URL}/customer/bestSellingProducts`)
                 .then(res => res.json())
                 .then(response => {
                     console.log("Best Selling Products Response:", response);
@@ -887,10 +1072,11 @@
 
         // Call everything on page load
         window.addEventListener('load', () => {
+            updateAuthButton();
+            setupCartLink();
             loadBestSellingProducts();
             loadOtherFunctions();
         });
-
     </script>
 </body>
 

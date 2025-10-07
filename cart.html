@@ -3,15 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Cart Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Priya Fresh Meats</title>
-    <meta name="description" content="Bemet - Butcher & Meat Shop HTML Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priya Fresh Meats - Your Cart</title>
+    <meta name="description"
+        content="Manage your shopping cart at Priya Fresh Meats - Fresh, quality meats delivered to your door.">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/pfm-logo.png">
 
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/pfm-logo2 (1)2.png">
-    <!-- CSS here -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
@@ -26,7 +29,7 @@
 </head>
 
 <body>
-    <!-- preloader -->
+    <!-- Preloader -->
     <div id="preloader">
         <div id="loading-center">
             <div class="loader">
@@ -35,15 +38,13 @@
             </div>
         </div>
     </div>
-    <!-- preloader-end -->
 
-    <!-- Scroll-top -->
-    <button class="scroll-top scroll-to-target" data-target="html">
+    <!-- Scroll-to-Top Button -->
+    <button class="scroll-top scroll-to-target" data-target="html" aria-label="Scroll to top">
         <i class="fas fa-angle-up"></i>
     </button>
-    <!-- Scroll-top-end-->
 
-    <!-- header-area -->
+    <!-- Header -->
     <header class="transparent-header">
         <div class="header-top-wrap">
             <div class="container custom-container">
@@ -57,7 +58,7 @@
                                 </li>
                                 <li>
                                     <i class="fas fa-envelope"></i>
-                                    <a href="mailto:info@example.com">priyafreshmeats@gmail.com</a>
+                                    <a href="mailto:priyafreshmeats@gmail.com">priyafreshmeats@gmail.com</a>
                                 </li>
                             </ul>
                         </div>
@@ -73,10 +74,10 @@
                             </div>
                             <div class="header-top-social">
                                 <ul class="list-wrap">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -90,17 +91,22 @@
                     <div class="col-12">
                         <div class="menu-wrap">
                             <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
-                            <nav class="menu-nav">
+                            <nav class="menu-nav" role="navigation">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/img/logo/pfm-logod2 (1)d website.png"
-                                            alt="Logo"></a>
+                                    <a href="index.html" aria-label="Home">
+                                        <img src="./assets/img/logo/pfm-logod2 (1)d website.png"
+                                            alt="Priya Fresh Meats Logo">
+                                    </a>
                                 </div>
                                 <div class="navbar-wrap main-menu d-none d-lg-flex">
                                     <ul class="navigation">
                                         <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">ABOUT US</a></li>
-                                        <li class="menu-item-has-children"><a href="shop.html">PRODUCTS</a></li>
-                                        <li class="menu-item-has-children"><a href="services.html">OUR Franchise</a>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li class="menu-item-has-children"><a href="shop.html">Products</a>
+
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="services.html">Our Franchise</a>
+
                                         </li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
@@ -108,15 +114,17 @@
                                 <div class="header-action d-none d-md-block">
                                     <ul class="list-wrap">
                                         <li class="header-search">
-                                            <a href="#"><i class="flaticon-search"></i></a>
+                                            <a href="#" aria-label="Search"><i class="flaticon-search"></i></a>
                                         </li>
                                         <li class="header-shop-cart">
-                                            <a href="/cart.html">
+                                            <a href="cart.html" aria-label="View Cart">
                                                 <i class="flaticon-shopping-basket"></i>
                                                 <span id="cart-count">0</span>
                                             </a>
                                         </li>
-                                        <li class="header-btn"><a href="tel:0123456789" class="btn">+91 9686068687</a>
+                                        <li class="header-btn">
+                                            <a href="tel:+919686068687" class="btn" aria-label="Call Us">+91
+                                                9686068687</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -124,42 +132,44 @@
                         </div>
                         <!-- Mobile Menu -->
                         <div class="mobile-menu">
-                            <nav class="menu-box">
+                            <nav class="menu-box" role="navigation">
                                 <div class="close-btn"><i class="fas fa-times"></i></div>
                                 <div class="nav-logo">
-                                    <a href="index.html"><img src="assets/img/logo/pfm-logod2 (1)d website.png"
-                                            alt="Logo"></a>
+                                    <a href="index.html">
+                                        <img src="assets/img/logo/pfm-logo.png" alt="Priya Fresh Meats Logo">
+                                    </a>
                                 </div>
                                 <div class="menu-outer">
-                                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                    <!-- Menu populated by JS -->
                                 </div>
                                 <div class="social-links">
                                     <ul class="clearfix list-wrap">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                        </li>
+                                        <li><a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
                                     </ul>
                                 </div>
                             </nav>
                         </div>
                         <div class="menu-backdrop"></div>
-                        <!-- End Mobile Menu -->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- header-search -->
+        <!-- Search Popup -->
         <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="search-wrap text-center">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="search-form">
-                                <form action="#">
-                                    <input type="text" placeholder="Enter your keyword...">
-                                    <button class="search-btn"><i class="flaticon-search"></i></button>
+                                <form action="#" role="search">
+                                    <input type="text" placeholder="Enter your keyword..." aria-label="Search">
+                                    <button class="search-btn" type="submit" aria-label="Submit Search"><i
+                                            class="flaticon-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -168,69 +178,171 @@
             </div>
         </div>
         <div class="search-backdrop"></div>
-        <!-- header-search-end -->
-    </header>
-    <!-- header-area-end -->
-
-    <!-- main-area -->
-    <main>
-        <!-- breadcrumb-area -->
-        <section class="breadcrumb-area tg-motion-effects breadcrumb-bg"
-            data-background="assets/img/pfmImg/contact.png">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="breadcrumb-content">
-                            <h2 class="title">Your Cart</h2>
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
-                                </ol>
-                            </nav>
+        <!-- header-search -->
+        <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="search-wrap text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="search-form">
+                                <form id="searchForm">
+                                    <input type="text" id="searchInput" placeholder="Enter your keyword...">
+                                    <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
+                                </form>
+                            </div>
+                            <div id="result"
+                                style="margin-top: 20px; color: white; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- breadcrumb-area-end -->
+        </div>
+        <div class="search-backdrop"></div>
+        <!-- header-search-end -->
 
-        <!-- cart-area -->
-        <section class="cart-area section-py-120">
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- 🧭 Breadcrumb -->
+        <section class="breadcrumb-area tg-motion-effects breadcrumb-bg" data-background="assets/img/pfmImg/contact.png"
+            role="banner">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="cart-table-wrap">
-                            <table class="cart-table table table-bordered">
-                                <thead>
+                <div class="breadcrumb-content text-center py-5">
+                    <h1 class="fw-bold text-white display-5 mb-2">🛒 Your Cart</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center mb-0">
+                            <li class="breadcrumb-item"><a href="index.html"
+                                    class="text-light text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">Cart</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </section>
+        <div class="text-end m-4">
+            <button onclick="location.href='order-history.html'"
+                class="bg-danger text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors font-semibold shadow-md">
+                Order History
+            </button>
+        </div>
+
+        <!-- 🛍️ Cart Area -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-hover">
+                                <thead class="bg-success text-white">
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
-                                        <th>Remove</th>
+                                        <th scope="col" class="text-center">Image</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col" class="text-center">Price</th>
+                                        <th scope="col" class="text-center">Quantity</th>
+                                        <th scope="col" class="text-center">Total</th>
+                                        <th scope="col" class="text-center">Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody id="cart-items">
-                                    <!-- Cart items will be dynamically inserted here -->
+                                    <!-- Cart items dynamically inserted here -->
                                 </tbody>
                             </table>
-                            <div class="cart-total">
-                                <h4>Total: <span id="cart-total">₹0.00</span></h4>
-                                <button id="checkout-btn" class="btn btn-primary mt-3">Proceed to Checkout</button>
+                        </div>
+
+                        <div class="d-flex flex-column align-items-end mt-4">
+                            <div class="bg-white border rounded-4 p-4 shadow-sm text-end w-100 w-md-50">
+                                <h4 class="fw-bold text-success">Total: <span id="cart-total">₹0.00</span></h4>
+                                <button id="checkout-btn"
+                                    class="btn btn-success px-5 py-2 mt-3 rounded-pill fw-semibold shadow-sm" disabled>
+                                    Proceed to Checkout
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- cart-area-end -->
-    </main>
-    <!-- main-area-end -->
 
-    <!-- footer-area -->
-    <footer>
+        <!-- 💳 Checkout Modal -->
+        <div id="checkoutModal" class="modal fade" tabindex="-1" aria-labelledby="checkoutModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content rounded-4 border-0 shadow-lg">
+                    <div class="modal-header bg-gradient bg-success text-white rounded-top-4">
+                        <h5 class="modal-title fw-bold" id="checkoutModalLabel">
+                            <i class="fas fa-wallet me-2"></i> Checkout Options
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light p-4">
+                        <!-- Wallet Section -->
+                        <div id="walletSection" class="mb-4" style="display:none;">
+                            <label class="form-label fw-bold text-success"><i class="fas fa-coins me-2"></i>Wallet
+                                Points</label>
+                            <input type="number" id="walletInput" class="form-control shadow-sm"
+                                placeholder="Enter points to use" min="0">
+                            <small class="text-muted d-block mt-1">Use your points to reduce order total.</small>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="text-center text-secondary fw-semibold my-3">OR</div>
+
+                        <!-- Coupon Section -->
+                        <div id="couponSection" class="mb-4">
+                            <label class="form-label fw-bold text-primary"><i
+                                    class="fas fa-ticket-alt me-2"></i>Available Coupons</label>
+                            <select id="couponSelect" class="form-select shadow-sm">
+                                <option value="">-- Select Coupon --</option>
+                            </select>
+                            <small class="text-muted d-block mt-1">Select a coupon to apply discount.</small>
+                        </div>
+
+                        <!-- Address Section -->
+                        <div>
+                            <label class="form-label fw-bold text-dark"><i
+                                    class="fas fa-map-marker-alt me-2"></i>Delivery Address</label>
+                            <input type="text" id="addressInput" class="form-control mb-3 shadow-sm"
+                                placeholder="Enter your address manually">
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <input type="text" id="pincodeInput" class="form-control mb-3 shadow-sm"
+                                        placeholder="Enter your pincode">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="phoneInput" class="form-control mb-3 shadow-sm"
+                                        placeholder="Enter phone number">
+                                </div>
+                            </div>
+
+                            <button id="useCurrentLocation"
+                                class="btn btn-outline-success mb-3 w-100 rounded-pill shadow-sm">
+                                <i class="fas fa-location-arrow me-2"></i> Use Current Location
+                            </button>
+                            <small id="locationDisplay" class="text-muted d-block mb-2"></small>
+
+                            <textarea id="notesInput" class="form-control shadow-sm" rows="3"
+                                placeholder="Additional notes (optional)"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer border-0 p-3 bg-white rounded-bottom-4">
+                        <button id="confirmCheckoutBtn"
+                            class="btn btn-success w-100 py-3 fw-semibold rounded-pill shadow-sm">
+                            <i class="fas fa-lock me-2"></i> Confirm & Pay Securely
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Footer -->
+    <footer role="contentinfo">
         <div class="footer-area">
             <div class="footer-logo-area">
                 <div class="container">
@@ -238,27 +350,33 @@
                         <ul class="list-wrap">
                             <li class="order-0 order-lg-2">
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/img/logo/pfm-logod2 (1)d website.png"
-                                            alt=""></a>
+                                    <a href="index.html">
+                                        <img src="assets/img/logo/pfm-logod2 (1)d website.png"
+                                            alt="Priya Fresh Meats Logo">
+                                    </a>
                                 </div>
                             </li>
                             <li>
                                 <div class="footer-social">
                                     <ul class="list-wrap">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                                        </li>
+                                        <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="order-lg-3">
                                 <div class="footer-newsletter">
                                     <h4 class="title">Our Newsletter</h4>
-                                    <form action="#">
-                                        <input type="email" placeholder="Enter your email...">
-                                        <button type="submit">subscribe</button>
+                                    <form id="newsletterForm" role="form">
+                                        <input type="email" placeholder="Enter your email..." required
+                                            aria-label="Email Address">
+                                        <button type="submit">Subscribe</button>
                                     </form>
+                                    <p id="newsletterMessage" style="margin-top:8px; color:#28a745; display:none;">
+                                        Subscribed successfully!</p>
                                 </div>
                             </li>
                         </ul>
@@ -270,13 +388,14 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="footer-widget">
-                                <h4 class="fw-title">about andspa</h4>
+                                <h4 class="fw-title">About Priya Fresh Meats</h4>
                                 <div class="footer-contact">
                                     <ul class="list-wrap">
-                                        <li>No.175, 1st Floor, 15th Main, M C Layout, Vprov, Vijaya Nagar, Bengaluru,
+                                        <li>No.175, 1st Floor, 15th Main, M C Layout, Vijaya Nagar, Bengaluru,
                                             Karnataka, 560040</li>
-                                        <li><a href="tel:0123456789">+91 9686068687</a></li>
-                                        <li><a href="mailto:info@bemet.com">priyafreshmeats@gmail.com</a></li>
+                                        <li><a href="tel:+919686068687">+91 9686068687</a></li>
+                                        <li><a href="mailto:priyafreshmeats@gmail.com">priyafreshmeats@gmail.com</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="footer-content">
@@ -290,32 +409,32 @@
                                 <h4 class="fw-title">Important Links</h4>
                                 <div class="footer-link">
                                     <ul class="list-wrap">
-                                        <li><a href="contact.html">CURATION</a></li>
-                                        <li><a href="about.html">ABOUT US</a></li>
-                                        <li><a href="contact.html">MY ACCOUNT</a></li>
-                                        <li><a href="contact.html">CONTACT</a></li>
-                                        <li><a href="contact.html">SHIPPING & RETURNS</a></li>
+                                        <li><a href="shop.html">Products</a></li>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="my-account.html">My Account</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="shipping-returns.html">Shipping & Returns</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-4">
                             <div class="footer-widget">
-                                <h4 class="fw-title">CATEGORIES</h4>
+                                <h4 class="fw-title">Categories</h4>
                                 <div class="footer-link">
                                     <ul class="list-wrap">
-                                        <li><a href="contact.html">How to Order</a></li>
-                                        <li><a href="contact.html">Delivery Info</a></li>
-                                        <li><a href="contact.html">FAQs</a></li>
+                                        <li><a href="how-to-order.html">How to Order</a></li>
+                                        <li><a href="delivery-info.html">Delivery Info</a></li>
+                                        <li><a href="faqs.html">FAQs</a></li>
                                         <li><a href="https://admin.priyafreshmeats.com/terms-and-condition">Terms &
                                                 Conditions</a></li>
                                         <li><a href="https://admin.priyafreshmeats.com/privacy-policy">Privacy
                                                 Policy</a></li>
                                         <li><a
                                                 href="https://admin.priyafreshmeats.com/delivery-partner/terms-and-condition">Delivery
-                                                Partner Terms & Conditions</a></li>
+                                                Partner Terms</a></li>
                                         <li><a href="https://admin.priyafreshmeats.com/delivery-partner/privacy-policy">Delivery
-                                                Partner Privacy Policy</a></li>
+                                                Partner Privacy</a></li>
                                         <li><a href="https://admin.priyafreshmeats.com/delete-account">Delete
                                                 Account</a></li>
                                     </ul>
@@ -324,31 +443,46 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-8">
                             <div class="footer-widget">
-                                <h4 class="fw-title">INSTAGRAM</h4>
+                                <h4 class="fw-title">Instagram</h4>
                                 <div class="footer-instagram">
                                     <ul class="list-wrap"
                                         style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0; list-style: none;">
-                                        <li><a href="#"><img src="assets/img/f/image_part_001.jpg" alt=""
-                                                    style="width: 100%; height: 90px; display: block;"></a></li>
-                                        <li><a href="#"><img src="assets/img/f/image_part_002.jpg" alt=""
-                                                    style="width: 100%; height: 90px; display: block;"></a></li>
-                                        <li><a href="#"><img src="assets/img/f/image_part_003.jpg" alt=""
-                                                    style="width: 100%; height: 90px; display: block;"></a></li>
-                                        <li><a href="#"><img src="assets/img/f/image_part_004.jpg" alt=""
-                                                    style="width: 100%; height: 90px; display: block;"></a></li>
-                                        <li><a href="#"><img src="assets/img/f/image_part_005.jpg" alt=""
-                                                    style="width: 100%; height: 90px; display: block;"></a></li>
-                                        <li><a href="#"><img src="assets/img/f/image_part_006.jpg" alt=""
-                                                    style="width: 100%; height: 90px; display: block;"></a></li>
-                                        <li><a href="#"><img src="assets/img/f/image_part_007.jpg" alt=""
-                                                    style="width: 100%; height: 90px; display: block;"></a></li>
-                                        <li><a href="#"><img src="assets/img/f/image_part_008.jpg" alt=""
-                                                    style="width: 100%; height: 90px; display: block;"></a></li>
+                                        <li><a href="#"><img src="assets/img/f/image_part_001.jpg"
+                                                    alt="Instagram Post 1"
+                                                    style="width: 100%; height: 90px; display: block; object-fit: cover;"></a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/img/f/image_part_002.jpg"
+                                                    alt="Instagram Post 2"
+                                                    style="width: 100%; height: 90px; display: block; object-fit: cover;"></a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/img/f/image_part_003.jpg"
+                                                    alt="Instagram Post 3"
+                                                    style="width: 100%; height: 90px; display: block; object-fit: cover;"></a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/img/f/image_part_004.jpg"
+                                                    alt="Instagram Post 4"
+                                                    style="width: 100%; height: 90px; display: block; object-fit: cover;"></a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/img/f/image_part_005.jpg"
+                                                    alt="Instagram Post 5"
+                                                    style="width: 100%; height: 90px; display: block; object-fit: cover;"></a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/img/f/image_part_006.jpg"
+                                                    alt="Instagram Post 6"
+                                                    style="width: 100%; height: 90px; display: block; object-fit: cover;"></a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/img/f/image_part_007.jpg"
+                                                    alt="Instagram Post 7"
+                                                    style="width: 100%; height: 90px; display: block; object-fit: cover;"></a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/img/f/image_part_008.jpg"
+                                                    alt="Instagram Post 8"
+                                                    style="width: 100%; height: 90px; display: block; object-fit: cover;"></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -358,23 +492,16 @@
                 <div class="row align-items-center">
                     <div class="col-lg-12 col-md-12">
                         <div class="copyright-text">
-                            <p>© 2025 By <a href="index.html">Priya Fresh Meats</a> , Powered by THE BRIGHT CARS . All
-                                Rights Reserved</p>
+                            <p>&copy; 2025 <a href="index.html">Priya Fresh Meats</a>. Powered by THE BRIGHT CARS. All
+                                Rights Reserved.</p>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-6 col-md-5"> -->
-                    <!-- <div class="footer-card text-end"> -->
-                    <!-- <img src="assets/img/images/card.png" alt=""> -->
-                    <!-- </div> -->
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
-        </div>
     </footer>
-    <!-- footer-area-end -->
 
-    <!-- JS here -->
+    <!-- JavaScript Libraries -->
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/imagesloaded.pkgd.min.js"></script>
@@ -390,370 +517,11 @@
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
 
-    <script>
-        const BASE_URL = "https://api.priyafreshmeats.com";
-
-        // Load cart count in header
-        function loadCartCount() {
-            const customerId = localStorage.getItem('pfm_userId');
-            const authToken = localStorage.getItem('pfm_authToken');
-            const cartCountElement = document.getElementById("cart-count");
-            if (!cartCountElement) return;
-
-            cartCountElement.textContent = '0';
-            if (!customerId || !authToken) return;
-
-            fetch(`${BASE_URL}/customer/cart/${customerId}`, {
-                headers: { 'Authorization': `Bearer ${authToken}` }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    const cartItems = data.data || [];
-                    cartCountElement.textContent = cartItems.length.toString();
-                })
-                .catch(err => {
-                    console.error("Error fetching cart count:", err);
-                    cartCountElement.textContent = '0';
-                });
-        }
-
-        // Check login
-        function checkAuth() {
-            const userId = localStorage.getItem("pfm_userId");
-            if (!userId) {
-                window.location.href = "signin-page.html";
-                return false;
-            }
-            return true;
-        }
-
-        // Load Razorpay script
-        function loadRazorpayScript() {
-            return new Promise((resolve, reject) => {
-                const script = document.createElement("script");
-                script.src = "https://checkout.razorpay.com/v1/checkout.js";
-                script.onload = () => resolve(true);
-                script.onerror = () => reject(new Error("Razorpay SDK failed to load"));
-                document.body.appendChild(script);
-            });
-        }
-
-        // Load cart items
-        function loadCart() {
-            if (!checkAuth()) return;
-
-            const customerId = localStorage.getItem('pfm_userId');
-            const authToken = localStorage.getItem('pfm_authToken');
-            const cartItemsContainer = document.getElementById("cart-items");
-            const cartTotalElement = document.getElementById("cart-total");
-            const cartCountElement = document.getElementById("cart-count");
-            const checkoutBtn = document.getElementById("checkout-btn");
-
-            if (!customerId || !authToken) {
-                cartItemsContainer.innerHTML = "<tr><td colspan='6' class='text-center'>Please log in to view your cart</td></tr>";
-                cartTotalElement.textContent = "₹0.00";
-                cartCountElement.textContent = "0";
-                checkoutBtn.disabled = true;
-                return;
-            }
-
-            fetch(`${BASE_URL}/customer/cart/${customerId}`, {
-                headers: { 'Authorization': `Bearer ${authToken}` }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    const cartItems = data.data || [];
-                    if (!cartItems.length) {
-                        cartItemsContainer.innerHTML = "<tr><td colspan='6' class='text-center'>Your cart is empty</td></tr>";
-                        cartTotalElement.textContent = "₹0.00";
-                        cartCountElement.textContent = "0";
-                        checkoutBtn.disabled = true;
-                        return;
-                    }
-
-                    checkoutBtn.disabled = false;
-                    cartCountElement.textContent = cartItems.length;
-                    let total = 0;
-                    cartItemsContainer.innerHTML = '';
-
-                    cartItems.forEach(item => {
-                        const price = item.subCategory.discountPrice || item.subCategory.price || 0;
-                        const count = item.count || 1;
-                        const itemTotal = price * count;
-                        total += itemTotal;
-
-                        const row = document.createElement("tr");
-                        row.innerHTML = `
-                <td><img src="${item.subCategory.img || 'assets/img/product4/placeholder.png'}" alt="${item.subCategory.name}" style="width: 80px; height: 80px;"></td>
-                <td>${item.subCategory.name || 'No Name'}</td>
-                <td>₹${price.toFixed(2)}</td>
-                <td>
-                    <div class="cart-plus-minus">
-                        <button class="dec qtybutton" data-id="${item.subCategory._id}" data-current="${count}">-</button>
-                        <input type="text" value="${count}" readonly>
-                        <button class="inc qtybutton" data-id="${item.subCategory._id}" data-current="${count}">+</button>
-                    </div>
-                </td>
-                <td>₹${itemTotal.toFixed(2)}</td>
-                <td><button class="btn btn-danger btn-sm remove-item" data-id="${item.subCategory._id}"><i class="fas fa-trash"></i></button></td>
-            `;
-                        cartItemsContainer.appendChild(row);
-                    });
-
-                    cartTotalElement.textContent = `₹${total.toFixed(2)}`;
-                    cartTotalElement.dataset.total = total.toFixed(2);
-
-                    attachCartEventListeners();
-                })
-                .catch(err => {
-                    console.error("Error fetching cart:", err);
-                    cartItemsContainer.innerHTML = "<tr><td colspan='6' class='text-center'>Error loading cart. Please try again later.</td></tr>";
-                    cartTotalElement.textContent = "₹0.00";
-                    cartCountElement.textContent = "0";
-                    checkoutBtn.disabled = true;
-                });
-        }
-
-        // Attach events for quantity and remove buttons
-        function attachCartEventListeners() {
-            document.querySelectorAll('.qtybutton').forEach(button => {
-                button.onclick = function () {
-                    const productId = this.dataset.id;
-                    const currentCount = parseInt(this.dataset.current);
-                    const increment = this.classList.contains('inc');
-                    updateQuantity(productId, increment, currentCount);
-                };
-            });
-
-            document.querySelectorAll('.remove-item').forEach(button => {
-                button.onclick = function () {
-                    removeItem(this.dataset.id);
-                };
-            });
-
-            const checkoutBtn = document.getElementById("checkout-btn");
-            if (checkoutBtn) checkoutBtn.onclick = initiateCheckout;
-        }
-
-        // Update quantity
-        function updateQuantity(productId, increment, currentCount) {
-            const customerId = localStorage.getItem('pfm_userId');
-            const authToken = localStorage.getItem('pfm_authToken');
-            const newCount = increment ? currentCount + 1 : Math.max(1, currentCount - 1);
-
-            fetch(`${BASE_URL}/customer/cart/${customerId}/item/${productId}`, {
-                method: 'PATCH',
-                headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' },
-                body: JSON.stringify({ count: newCount.toString() })
-            })
-                .then(res => res.json())
-                .then(() => loadCart())
-                .catch(err => {
-                    console.error("Error updating quantity:", err);
-                    alert("Failed to update quantity. Please try again.");
-                });
-        }
-
-        // Remove item
-        function removeItem(productId) {
-            const customerId = localStorage.getItem('pfm_userId');
-            const authToken = localStorage.getItem('pfm_authToken');
-
-            fetch(`${BASE_URL}/customer/cart/${customerId}/item/${productId}`, {
-                method: 'DELETE',
-                headers: { 'Authorization': `Bearer ${authToken}` }
-            })
-                .then(res => res.json())
-                .then(() => loadCart())
-                .catch(err => {
-                    console.error("Error removing item:", err);
-                    alert("Failed to remove item. Please try again.");
-                });
-        }
-
-        // Initiate checkout with Razorpay
-        async function initiateCheckout() {
-            const customerId = localStorage.getItem('pfm_userId');
-            const authToken = localStorage.getItem('pfm_authToken');
-            const totalAmount = document.getElementById("cart-total").dataset.total || '0';
-
-            if (!authToken) {
-                alert("Please log in to checkout.");
-                window.location.href = 'signin-page.html';
-                return;
-            }
-
-            try {
-                await loadRazorpayScript();
-
-                const res = await fetch(`${BASE_URL}/payments/initiate`, {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount: totalAmount.toString(), id: customerId })
-                });
-                const data = await res.json();
-
-                if (!data.success) {
-                    alert("Payment initiation failed: " + (data.message || "Unknown error"));
-                    return;
-                }
-
-                const options = {
-                    key: "rzp_test_R9sbSkX4NbwNms",
-                    amount: data.amount,
-                    currency: data.currency || "INR",
-                    name: "Priya Fresh Meats",
-                    description: "Order Payment",
-                    order_id: data.orderId,
-                    handler: async function (response) {
-                        try {
-                            const verifyRes = await fetch(`${BASE_URL}/api/payment/verify`, {
-                                method: 'POST',
-                                headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' },
-                                body: JSON.stringify(response)
-                            });
-                            const verifyData = await verifyRes.json();
-                            if (verifyData.success) {
-                                alert("Payment successful!");
-                                loadCart();
-                            } else {
-                                alert("Payment verification failed.");
-                            }
-                        } catch (err) {
-                            console.error(err);
-                            alert("Error verifying payment.");
-                        }
-                    },
-                    prefill: { name: "Customer", email: "customer@example.com", contact: "9999999999" },
-                    theme: { color: "#3399cc" }
-                };
-                const rzp = new window.Razorpay(options);
-                rzp.open();
-
-            } catch (err) {
-                console.error("Checkout error:", err);
-                alert("Failed to initiate checkout.");
-            }
-        }
-
-        // Load best-selling products
-        function loadBestSellingProducts() {
-            if (!checkAuth()) return;
-
-            const userId = localStorage.getItem("pfm_userId");
-            fetch(`${BASE_URL}/customer/bestSellingProducts/user/${userId}`)
-                .then(res => res.json())
-                .then(response => {
-                    const container = document.querySelector('.product-area-two .row.justify-content-center');
-                    if (response.success && response.data && container) {
-                        container.innerHTML = '';
-                        response.data.slice(0, 4).forEach(product => {
-                            const div = document.createElement('div');
-                            div.className = 'col-lg-6 col-md-10';
-                            div.innerHTML = `
-                        <div class="product-item-two">
-                            <div class="product-img-two">
-                                <a href="shop-details.html">
-                                    <img src="${product.img}" alt="${product.name}" style="height: 12rem; width: 100%; object-fit: cover;">
-                                </a>
-                            </div>
-                            <div class="product-content-two">
-                                <div class="product-info">
-                                    <h4 class="title"><a href="shop-details.html">${product.name}</a></h4>
-                                    <p>${product.description || 'Fresh and organic product.'}</p>
-                                </div>
-                                <div class="product-price">
-                                    <h5 class="price">₹${(product.discountPrice || product.price).toFixed(2)}</h5>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                            container.appendChild(div);
-                        });
-                    }
-                })
-                .catch(err => console.error("Error loading best-selling products:", err));
-        }
-
-        // Search function
-        function searchItem() {
-            if (!checkAuth()) return;
-
-            const name = document.getElementById("searchInput").value.trim();
-            if (!name) { alert("Enter search term"); return; }
-
-            fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
-                .then(res => res.json())
-                .then(data => {
-                    const container = document.getElementById("result");
-                    if (data.success && data.data && data.data.length) {
-                        container.innerHTML = data.data.map(i => `<div><h5>${i.name}</h5><p>₹${(i.discountPrice || i.price).toFixed(2)}</p></div>`).join('');
-                    } else { container.innerHTML = "<p>No items found</p>"; }
-                })
-                .catch(err => console.error(err));
-        }
-
-        // Run on page load
-        window.addEventListener('load', () => {
-            loadCartCount();
-            loadCart();
-            loadBestSellingProducts();
-        });
-    </script>
+    <!-- Custom JavaScript -->
 
 
-    <style>
-        .cart-area {
-            padding: 120px 0;
-        }
 
-        .cart-table {
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .cart-table th,
-        .cart-table td {
-            padding: 15px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .cart-table th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-        }
-
-        .cart-plus-minus {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .cart-plus-minus button {
-            width: 30px;
-            height: 30px;
-            border: 1px solid #ddd;
-            background: #f8f9fa;
-            cursor: pointer;
-        }
-
-        .cart-plus-minus input {
-            width: 50px;
-            text-align: center;
-            border: 1px solid #ddd;
-            margin: 0 5px;
-        }
-
-        .cart-total {
-            text-align: right;
-        }
-
-        .cart-total h4 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-    </style>
+    <script src="./cart.js"></script>
 </body>
 
 </html>

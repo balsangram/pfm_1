@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Redirect /page to /page.html
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
+
+# Optional: Redirect index.html to root
+RewriteRule ^index\.html$ / [R=301,L]

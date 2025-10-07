@@ -105,7 +105,7 @@
                                         <li><a href="index.html">Home</a></li>
 
                                         <!-- </li> -->
-                                        <li class="active"><a href="about.html">ABOUT US</a></li>
+                                        <li class=""><a href="about.html">ABOUT US</a></li>
                                         <li class="menu-item-has-children">
                                             <a href="shop.html">PRODUCTS</a>
                                         </li>
@@ -192,12 +192,7 @@
 
     </header>
     <!-- header-area-end -->
-
-
-    <!-- main-area -->
     <main>
-
-        <!-- breadcrumb-area -->
 
         <section class="breadcrumb-area tg-motion-effects breadcrumb-bg"
             data-background="assets/img/pfmImg/contact.png">
@@ -205,11 +200,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb-content">
-                            <h2 class="title">About us</h2>
+                            <h2 class="title">Order History</h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">about us</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Order History</li>
                                 </ol>
                             </nav>
                         </div>
@@ -219,54 +214,15 @@
         </section>
 
 
+        <section>
 
-        <!-- faq-area -->
-        <section class="faq-area tg-motion-effects faq-bg" data-background="assets/img/bg/faq_bg.jpg">
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-lg-6 col-md-10">
-                        <div class="">
-                            <img src="assets/img/logo//pfm-logod2 (1)d website.png" alt="">
-                            <!-- <img src="assets/img/images/faq_img02.png" alt="">
-                            <img src="assets/img/images/faq_img03.png" alt=""> -->
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="faq-content">
-                            <div class="section-title mb-60">
-                                <span class="sub-title">About Us</span>
-                                <h2 class="title">Expertise in Premium Poultry</h2>
-                            </div>
-                            <div class="faq-wrap">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
-                                                At Priya Fresh Chicken, we pride ourselves on delivering naturally
-                                                tender, farm-fresh chicken. Our deep understanding of sourcing, hygiene,
-                                                and customer satisfaction ensures top-quality products for every meal.
-                                            </button>
-                                        </h2>
+            <div id="order-history-container" class="max-w-4xl mx-auto mt-8 px-4"></div>
+            <div id="orders-list"></div>
+            <p id="no-orders" class="text-center text-gray-600 mt-8 hidden">No orders found.</p>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-shape-wrap">
-                <img src="assets/img/images/faq_shape01.png" alt="" class="tg-motion-effects3">
-                <img src="assets/img/images/faq_shape02.png" alt="" class="tg-motion-effects2">
-            </div>
         </section>
-        <!-- faq-area-end -->
 
     </main>
-    <!-- main-area-end -->
-
     <!-- footer-area -->
     <footer>
         <div class="footer-area">
@@ -431,206 +387,96 @@
     <script src="assets/js/main.js"></script>
 
 </body>
+
 <script>
-    const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
+    const BASE_URL = "https://api.priyafreshmeats.com";
 
-    const newsletterForm = document.getElementById("newsletterForm");
-    const newsletterMessage = document.getElementById("newsletterMessage");
+    // Status badge colors
+    const statusColors = {
+        pending: 'bg-yellow-100 text-yellow-800',
+        accepted: 'bg-blue-100 text-blue-800',
+        picked_up: 'bg-green-100 text-green-800',
+        in_transit: 'bg-indigo-100 text-indigo-800',
+        delivered: 'bg-green-100 text-green-800',
+        rejected: 'bg-red-100 text-red-800'
+    };
 
-    newsletterForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent default form submission
+    const container = document.getElementById('order-history-container');
+    const noOrders = document.getElementById('no-orders');
 
-        // Here you could also send the email via fetch/AJAX if needed
-        const email = newsletterForm.querySelector('input[type="email"]').value;
-        if (email) {
-            newsletterMessage.style.display = "block"; // Show submitted message
-            newsletterForm.reset(); // Clear input
-        }
-    });
-
-    // Load cart count
-    function loadCartCount() {
-        const customerId = localStorage.getItem('pfm_userId');
+    function loadOrderHistory() {
+        const userId = localStorage.getItem('pfm_userId');
         const authToken = localStorage.getItem('pfm_authToken');
-        const cartCountElement = document.getElementById("cart-count");
 
-        if (!cartCountElement) return; // ✅ Safety check
+        if (!userId || !authToken) {
+            container.innerHTML = `
+            <div class="text-center py-12">
+                <p class="text-red-500 mb-4">Please log in to view your orders.</p>
+                <a href="signin-page.html" class="bg-primary text-white px-6 py-3 rounded-full inline-block">Login</a>
+            </div>
+        `;
+            return;
+        }
 
-        // ✅ Ensure no duplicate listeners
-        cartCountElement.onclick = () => {
-            if (!customerId || customerId === '0' || !authToken) {
-                window.location.href = "signin-page.html"; // redirect to login
-            } else {
-                window.location.href = "cart.html"; // go to cart
-            }
-        };
+        // Show loading
+        container.innerHTML = `
+        <div class="text-center py-12">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p class="text-gray-600">Loading your orders...</p>
+        </div>
+    `;
+        noOrders.classList.add('hidden');
 
-        // ✅ Default count
-        cartCountElement.textContent = '0';
-
-        if (!customerId || customerId === '0' || !authToken) return; // stop here if user not logged in
-
-        fetch(`${BASE_URL}/customer/cart/${customerId}`, {
+        fetch(`${BASE_URL}/customer/order-history/${userId}`, {
             headers: { 'Authorization': `Bearer ${authToken}` }
         })
             .then(res => res.json())
             .then(data => {
-                const cartItems = data.data || [];
-                cartCountElement.textContent = cartItems.length.toString();
-            })
-            .catch(err => {
-                console.error("Error fetching cart count:", err);
-                cartCountElement.textContent = '0';
-            });
-    }
-
-
-    function checkAuth() {
-        const userId = localStorage.getItem("pfm_userId");
-        if (!userId) {
-            window.location.href = "signin-page.html";
-            return false;
-        }
-        return true;
-    }
-
-    function searchItem() {
-        if (!checkAuth()) return;
-
-        const name = document.getElementById("searchInput").value.trim();
-        if (!name) {
-            alert("Please enter something to search");
-            return;
-        }
-
-        fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log("Search Result:", data);
-                const resultContainer = document.getElementById("result");
-
-                // Clear previous results
-                resultContainer.innerHTML = "";
-
-                // Set white background and scrollable container
-                resultContainer.style.cssText = `
-                max-height: 400px;
-                overflow-y: auto;
-                background: #EFE8D9;
-                border-radius: 8px;
-                padding: 10px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            `;
-
-                if (data.success && data.data && data.data.length > 0) {
-                    data.data.forEach(item => {
-                        const div = document.createElement("div");
-                        div.className = "search-item-card";
-                        div.style.cssText = `
-                        display: flex; 
-                        align-items: center; 
-                        padding: 10px; 
-                        margin-bottom: 8px; 
-                        border-radius: 6px; 
-                        background: #f9f9f9; 
-                        transition: transform 0.2s, background 0.2s;
-                        cursor: pointer;
-                    `;
-
-                        div.onmouseover = () => {
-                            div.style.background = "#f1f1f1";
-                            div.style.transform = "translateY(-2px)";
-                        };
-                        div.onmouseout = () => {
-                            div.style.background = "#f9f9f9";
-                            div.style.transform = "translateY(0)";
-                        };
-
-                        div.innerHTML = `
-                        <img src="${item.img || 'assets/img/placeholder.png'}" alt="${item.name}" 
-                             style="width: 50px; height: 50px; object-fit: cover; margin-right: 12px; border-radius: 4px; border: 1px solid #ddd;">
-                        <div style="flex: 1;">
-                            <h5 style="margin: 0; color: #333; font-weight: 600;">
-                                <a href="shop-details.html?id=${item.id}" style="color: #333; text-decoration: none;">
-                                    ${item.name}
-                                </a>
-                            </h5>
-                            <p style="margin: 4px 0 0 0; color: #555; font-size: 14px;">
-                                Price: ₹${(item.discountPrice || item.price).toFixed(2)}
-                            </p>
-                        </div>
-                    `;
-
-                        resultContainer.appendChild(div);
-                    });
-                } else {
-                    resultContainer.innerHTML = `
-                    <p style="color: #333; text-align: center; margin-top: 20px;">
-                        No items found.
-                    </p>
-                `;
-                }
-            })
-            .catch(err => console.error("Error searching items:", err));
-    }
-
-    // Attach event listener to the search form
-    document.addEventListener('DOMContentLoaded', function () {
-        const searchForm = document.getElementById('searchForm');
-        if (searchForm) {
-            searchForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                searchItem();
-            });
-        }
-    });
-
-    function loadBestSellingProducts() {
-        if (!checkAuth()) return;
-
-        const userId = localStorage.getItem("pfm_userId");
-
-        fetch(`${BASE_URL}/customer/bestSellingProducts/user/${userId}`)
-            .then(res => res.json())
-            .then(response => {
-                console.log("Best Selling Products Response:", response);
-                const container = document.querySelector('.product-area-two .row.justify-content-center');
-                if (response.success && response.data && response.data.length > 0 && container) {
+                if (!data.success || !data.data || data.data.length === 0) {
                     container.innerHTML = '';
-                    const products = response.data.slice(0, 4);
-                    products.forEach(product => {
-                        const colDiv = document.createElement('div');
-                        colDiv.className = 'col-lg-6 col-md-10';
-                        colDiv.innerHTML = `
-                    <div class="product-item-two">
-                        <div class="product-img-two">
-                            <a href="shop-details.html">
-                                <img src="${product.img}" alt="${product.name}" style="height: 12rem; width: 100%; object-fit: cover;">
-                            </a>
-                        </div>
-                        <div class="product-content-two">
-                            <div class="product-info">
-                                <h4 class="title"><a href="shop-details.html">${product.name}</a></h4>
-                                <p>${product.description || 'Fresh and organic product, perfect for your meals.'}</p>
+                    noOrders.classList.remove('hidden');
+                    return;
+                }
+
+                let html = '';
+                data.data.forEach(order => {
+                    const statusClass = statusColors[order.status] || 'bg-gray-100 text-gray-800';
+
+                    order.items.forEach(item => {
+                        html += `
+                    <div class="border border-gray-200 rounded-lg p-4 bg-white shadow-sm hover:shadow-md mb-4 flex items-center space-x-4 transition-transform transform hover:-translate-y-1">
+                       <img src="${item.image}" alt="${item.name}" class="object-cover rounded-md border" style="width:80px; height:90px;">
+<div class="flex-1">
+                            <h4 class="text-md font-semibold text-gray-800 mb-1">${item.name}</h4>
+                            <div class="text-sm text-gray-600 flex justify-between w-48">
+                                <span>Qty: ${item.quantity}</span>
+                                <span>₹${item.price.toFixed(2)}</span>
+                                <span>Total: ₹${item.total.toFixed(2)}</span>
                             </div>
-                            <div class="product-price">
-                                <h5 class="price">₹${(product.discountPrice || product.price).toFixed(2)}</h5>
-                            </div>
                         </div>
+                        <span class="px-2 py-1 rounded-full text-xs font-semibold ${statusClass}">${order.status.toUpperCase()}</span>
                     </div>
                 `;
-                        container.appendChild(colDiv);
                     });
-                } else {
-                    console.warn("No best-selling products found or API error");
-                    if (container) container.innerHTML = '<p>No products found.</p>';
-                }
+                });
+
+                container.innerHTML = html;
+                noOrders.classList.add('hidden');
             })
-            .catch(err => console.error("Error fetching best-selling products:", err));
+            .catch(err => {
+                console.error('Error fetching order history:', err);
+                container.innerHTML = `
+            <div class="text-center py-12">
+                <p class="text-red-500">Failed to load orders. Please try again.</p>
+                <button onclick="loadOrderHistory()" class="bg-primary text-white px-6 py-2 rounded-full mt-4 hover:bg-red-600 transition-colors">Retry</button>
+            </div>
+        `;
+            });
     }
-    window.addEventListener('load', () => {
-        // loadBestSellingProducts();
-        loadCartCount();
+
+    // Load orders on page ready
+    document.addEventListener('DOMContentLoaded', () => {
+        loadOrderHistory();
     });
 </script>
 

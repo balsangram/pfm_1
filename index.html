@@ -213,6 +213,28 @@
         </div>
         <div class="search-backdrop"></div>
         <!-- header-search-end -->
+        <!-- header-search -->
+        <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="search-wrap text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="search-form">
+                                <form id="searchForm">
+                                    <input type="text" id="searchInput" placeholder="Enter your keyword...">
+                                    <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
+                                </form>
+                            </div>
+                            <div id="result"
+                                style="margin-top: 20px; color: white; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-backdrop"></div>
+        <!-- header-search-end -->
 
     </header>
     <!-- header-area-end -->
@@ -635,10 +657,12 @@
                             <li class="order-lg-3">
                                 <div class="footer-newsletter">
                                     <h4 class="title">Our Newsletter</h4>
-                                    <form action="#">
-                                        <input type="email" placeholder="Enter your email...">
-                                        <button type="submit">subscribe</button>
+                                    <form id="newsletterForm">
+                                        <input type="email" placeholder="Enter your email..." required>
+                                        <button type="submit">Subscribe</button>
                                     </form>
+                                    <p id="newsletterMessage" style="margin-top:8px; color:green; display:none;">
+                                        Submitted!</p>
                                 </div>
                             </li>
                         </ul>
@@ -774,6 +798,20 @@
 <script>
     const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
 
+    const newsletterForm = document.getElementById("newsletterForm");
+    const newsletterMessage = document.getElementById("newsletterMessage");
+
+    newsletterForm.addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Here you could also send the email via fetch/AJAX if needed
+        const email = newsletterForm.querySelector('input[type="email"]').value;
+        if (email) {
+            newsletterMessage.style.display = "block"; // Show submitted message
+            newsletterForm.reset(); // Clear input
+        }
+    });
+
     // Load cart count
     function loadCartCount() {
         const customerId = localStorage.getItem('pfm_userId') || '0';
@@ -804,6 +842,8 @@
         return !!userId;
     }
 
+
+
     // Update auth button
     function updateAuthButton() {
         const userId = localStorage.getItem('pfm_userId');
@@ -827,6 +867,8 @@
             authBtn.onclick = null;
         }
     }
+
+
 
     function loadBestSellingProducts() {
         console.log("🚀 ~ loadBestSellingProducts ~ called");
@@ -930,15 +972,52 @@
             });
         }
     }
+    function getUserLocation(callback) {
+        const dummyLocation = { latitude: 12.9716, longitude: 77.5946 }; // Bangalore
 
-    // Run on page load
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+                    console.log("User location found:", userLocation);
+                    callback(userLocation);
+                },
+                (error) => {
+                    console.warn("Geolocation failed or denied. Using dummy location.", error);
+                    callback(dummyLocation);
+                },
+                { timeout: 5000 }
+            );
+        } else {
+            console.warn("Geolocation not supported. Using dummy location.");
+            callback(dummyLocation);
+        }
+    }
+
+    // Usage: update a DOM element with location
     window.addEventListener('load', () => {
+        getUserLocation((location) => {
+            console.log("Final location to use:", location);
+
+            // Update DOM element with id "user-location"
+            const locationDiv = document.getElementById("user-location");
+            if (locationDiv) {
+                locationDiv.textContent = `Latitude: ${location.latitude}, Longitude: ${location.longitude}`;
+            }
+        });
+
+        // Other page load functions
         loadCartCount();
         updateAuthButton();
         loadBestSellingProducts();
         setupCartLink();
         setupSearch();
     });
+
+
 </script>
 
 

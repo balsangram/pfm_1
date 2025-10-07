@@ -47,44 +47,6 @@
     <!-- header-area -->
     <header class="transparent-header">
         <div class="header-top-wrap">
-            <!-- <div class="container custom-container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-8">
-                        <div class="header-top-left">
-                            <ul class="list-wrap">
-                                <li class="header-location">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    No.175, 1st Floor, 15th Main, M C Layout, Vprov, Vijaya Nagar, Bengaluru, Karnataka,
-                                    560040
-                                </li>
-                                <li>
-                                    <i class="fas fa-envelope"></i>
-                                    <a href="mailto:info@example.com">priyafreshmeats@gmail.com</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-4">
-                        <div class="header-top-right">
-                            <div class="header-top-menu">
-                                <ul class="list-wrap">
-                                    <li><a href="contact.html">Help</a></li>
-                                    <li><a href="contact.html">Support</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </div>
-                            <div class="header-top-social">
-                                <ul class="list-wrap">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
             <div class="container custom-container">
                 <div class="row align-items-center">
@@ -180,7 +142,9 @@
                                         </li>
                                         <li class="header-shop-cart">
                                             <a href="#">
-                                                <i class="flaticon-shopping-basket"></i>
+                                                <i class="flaticon-shopping-basket" id="cart-icon"
+                                                    style="cursor:pointer;"></i>
+
                                                 <span id="cart-count">0</span>
                                             </a>
                                         </li>
@@ -228,10 +192,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="search-form">
-                                <form action="#">
-                                    <input type="text" placeholder="Enter your keyword...">
-                                    <button class="search-btn"><i class="flaticon-search"></i></button>
+                                <form id="searchForm">
+                                    <input type="text" id="searchInput" placeholder="Enter your keyword...">
+                                    <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
                                 </form>
+                            </div>
+                            <div id="result"
+                                style="margin-top: 20px; color: white; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
                             </div>
                         </div>
                     </div>
@@ -240,6 +207,7 @@
         </div>
         <div class="search-backdrop"></div>
         <!-- header-search-end -->
+
 
     </header>
     <!-- header-area-end -->
@@ -349,202 +317,7 @@
                 <img src="assets/img/images/about_shape02.png" alt="" class="tg-motion-effects3"> -->
             </div>
         </section>
-        <!-- about-area-end -->
 
-        <!-- services-area -->
-        <!-- <section class="services-area services-bg" data-background="assets/img/bg/services_bg.jpg">
-            <div class="choose-bg-shape services-shape" data-background="assets/img/images/choose_bg_shape.png"></div>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7 order-0 order-lg-2">
-                        <div class="services-item-wrap">
-                            <ul class="list-wrap">
-                                <li>
-                                    <div class="services-item">
-                                        <div class="icon">
-                                            <i class="flaticon-online-shop"></i>
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title"><a href="services-details.html">Fresh Chicken Supply
-                                                </a></h4>
-                                            <p>We deliver farm-fresh, antibiotic-free chicken with a focus on hygiene
-                                                and consistent quality to meet daily household and commercial needs.</p>
-                                            <span class="number">01</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="services-item">
-                                        <div class="icon">
-                                            <i class="flaticon-gift-1"></i>
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title"><a href="services-details.html">company-icon
-                                                    Retail & Franchise Setup</a>
-                                            </h4>
-                                            <p>We provide opportunities for entrepreneurs to open Priya Fresh Chicken
-                                                outlets, ensuring steady supply and operational support.</p>
-                                            <span class="number">02</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="services-item">
-                                        <div class="icon">
-                                            <i class="flaticon-chicken-wings"></i>
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title"><a href="services-details.html">Cold Chain Logistics</a>
-                                            </h4>
-                                            <p>Our cold storage and transport systems preserve freshness and quality
-                                                from farm to kitchen with minimal spoilage.</p>
-                                            <span class="number">03</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="services-item">
-                                        <div class="icon">
-                                            <i class="flaticon-chicken"></i>
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title"><a href="services-details.html">Business Growth
-                                                    Support</a></h4>
-                                            <p>We help partners grow through marketing materials, sales training, and
-                                                technology integration for smoother operations.</p>
-                                            <span class="number">04</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="services-content">
-                            <div class="section-title mb-40">
-                                <span class="sub-title">Our Services</span>
-                                <h2 class="title">Offer Premium <span>Quality</span></h2>
-                            </div>
-                            <p>We provide well shaped fresh and organic meat from our farm very hygienic way.</p>
-                            <span><img src="assets/img/icons/about_icon.png" alt="">Shaped fresh and organic meat our
-                                farm</span>
-                    <div class="services-info">
-                                <div class="icon">
-                                    <i class="flaticon-gift-1"></i>
-                                </div>
-                                <div class="content">
-                                    <h4 class="title">Friday ( 30% Off )</h4>
-                                    <span>2:30 PM - 7:30 PM</span>
-                                </div>
-                            </div>
-                    <a href="shop.html" class="btn btn-two">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section> -->
-        <!-- services-area-end -->
-
-        <!-- cta-area -->
-        <!-- <section class="cta-area position-relative">
-            <div class="cta-bg" data-background="assets/img/bg/cta_bg.jpg"></div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="cta-content">
-                            <img src="assets/img/icons/cta_icon.png" alt="">
-                            <h2 class="title">Get a Free Quote</h2>
-                            <div class="cta-bottom">
-                                <a href="shop.html" class="btn">buy now</a>
-                                <a href="tel:0123456789" class="btn call-btn"><i class="fas fa-headphones-alt"></i>make
-                                    a call</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-        <!-- cta-area-end -->
-
-        <!-- faq-area -->
-        <!-- <section class="faq-area tg-motion-effects faq-bg" data-background="assets/img/bg/faq_bg.jpg">
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-lg-6 col-md-10">
-                        <div class="faq-img-wrap">
-                            <img src="assets/img/images/faq_img01.png" alt="">
-                            <img src="assets/img/images/faq_img02.png" alt="">
-                            <img src="assets/img/images/faq_img03.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="faq-content">
-                            <div class="section-title mb-60">
-                                <span class="sub-title">Customer Quotes</span>
-                                <h2 class="title">Frequently <span>Asked</span> Questions.</h2>
-                            </div>
-                            <div class="faq-wrap">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
-                                                hamburg Meat is animal flesh food.
-                                            </button>
-                                        </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show"
-                                            data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <p>Meat provide well shaped fresh and the organic meat well animals is
-                                                    Humans have hunted schistoric times</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                aria-expanded="false" aria-controls="collapseTwo">
-                                                Revolution allowed the of animals
-                                            </button>
-                                        </h2>
-                                        <div id="collapseTwo" class="accordion-collapse collapse"
-                                            data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <p>Meat provide well shaped fresh and the organic meat well animals is
-                                                    Humans have hunted schistoric times</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                aria-expanded="false" aria-controls="collapseThree">
-                                                Meat is animal flesh food.
-                                            </button>
-                                        </h2>
-                                        <div id="collapseThree" class="accordion-collapse collapse"
-                                            data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <p>Meat provide well shaped fresh and the organic meat well animals is
-                                                    Humans have hunted schistoric times</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-shape-wrap">
-                <img src="assets/img/images/faq_shape01.png" alt="" class="tg-motion-effects3">
-                <img src="assets/img/images/faq_shape02.png" alt="" class="tg-motion-effects2">
-            </div>
-        </section> -->
-        <!-- faq-area-end -->
         <div class="contact-wrap">
             <div class="container">
                 <div class="row align-items-center">
@@ -618,10 +391,12 @@
                             <li class="order-lg-3">
                                 <div class="footer-newsletter">
                                     <h4 class="title">Our Newsletter</h4>
-                                    <form action="#">
-                                        <input type="email" placeholder="Enter your email...">
-                                        <button type="submit">subscribe</button>
+                                    <form id="newsletterForm">
+                                        <input type="email" placeholder="Enter your email..." required>
+                                        <button type="submit">Subscribe</button>
                                     </form>
+                                    <p id="newsletterMessage" style="margin-top:8px; color:green; display:none;">
+                                        Submitted!</p>
                                 </div>
                             </li>
                         </ul>
@@ -757,15 +532,41 @@
 <script>
     const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
 
+    const newsletterForm = document.getElementById("newsletterForm");
+    const newsletterMessage = document.getElementById("newsletterMessage");
+
+    newsletterForm.addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Here you could also send the email via fetch/AJAX if needed
+        const email = newsletterForm.querySelector('input[type="email"]').value;
+        if (email) {
+            newsletterMessage.style.display = "block"; // Show submitted message
+            newsletterForm.reset(); // Clear input
+        }
+    });
+
     // Load cart count
     function loadCartCount() {
-        const customerId = localStorage.getItem('pfm_userId') || '0';
-        const authToken = localStorage.getItem('pfm_authToken') || '';
+        const customerId = localStorage.getItem('pfm_userId');
+        const authToken = localStorage.getItem('pfm_authToken');
         const cartCountElement = document.getElementById("cart-count");
 
+        if (!cartCountElement) return; // ✅ Safety check
+
+        // ✅ Ensure no duplicate listeners
+        cartCountElement.onclick = () => {
+            if (!customerId || customerId === '0' || !authToken) {
+                window.location.href = "signin-page.html"; // redirect to login
+            } else {
+                window.location.href = "cart.html"; // go to cart
+            }
+        };
+
+        // ✅ Default count
         cartCountElement.textContent = '0';
 
-        if (customerId === '0' || !authToken) return;
+        if (!customerId || customerId === '0' || !authToken) return; // stop here if user not logged in
 
         fetch(`${BASE_URL}/customer/cart/${customerId}`, {
             headers: { 'Authorization': `Bearer ${authToken}` }
@@ -780,6 +581,98 @@
                 cartCountElement.textContent = '0';
             });
     }
+
+    function searchItem() {
+        if (!checkAuth()) return;
+
+        const name = document.getElementById("searchInput").value.trim();
+        if (!name) {
+            alert("Please enter something to search");
+            return;
+        }
+
+        fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("Search Result:", data);
+                const resultContainer = document.getElementById("result");
+
+                // Clear previous results
+                resultContainer.innerHTML = "";
+
+                // Set white background and scrollable container
+                resultContainer.style.cssText = `
+                max-height: 400px;
+                overflow-y: auto;
+                background: #EFE8D9;
+                border-radius: 8px;
+                padding: 10px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            `;
+
+                if (data.success && data.data && data.data.length > 0) {
+                    data.data.forEach(item => {
+                        const div = document.createElement("div");
+                        div.className = "search-item-card";
+                        div.style.cssText = `
+                        display: flex; 
+                        align-items: center; 
+                        padding: 10px; 
+                        margin-bottom: 8px; 
+                        border-radius: 6px; 
+                        background: #f9f9f9; 
+                        transition: transform 0.2s, background 0.2s;
+                        cursor: pointer;
+                    `;
+
+                        div.onmouseover = () => {
+                            div.style.background = "#f1f1f1";
+                            div.style.transform = "translateY(-2px)";
+                        };
+                        div.onmouseout = () => {
+                            div.style.background = "#f9f9f9";
+                            div.style.transform = "translateY(0)";
+                        };
+
+                        div.innerHTML = `
+                        <img src="${item.img || 'assets/img/placeholder.png'}" alt="${item.name}" 
+                             style="width: 50px; height: 50px; object-fit: cover; margin-right: 12px; border-radius: 4px; border: 1px solid #ddd;">
+                        <div style="flex: 1;">
+                            <h5 style="margin: 0; color: #333; font-weight: 600;">
+                                <a href="shop-details.html?id=${item.id}" style="color: #333; text-decoration: none;">
+                                    ${item.name}
+                                </a>
+                            </h5>
+                            <p style="margin: 4px 0 0 0; color: #555; font-size: 14px;">
+                                Price: ₹${(item.discountPrice || item.price).toFixed(2)}
+                            </p>
+                        </div>
+                    `;
+
+                        resultContainer.appendChild(div);
+                    });
+                } else {
+                    resultContainer.innerHTML = `
+                    <p style="color: #333; text-align: center; margin-top: 20px;">
+                        No items found.
+                    </p>
+                `;
+                }
+            })
+            .catch(err => console.error("Error searching items:", err));
+    }
+
+    // Attach event listener to the search form
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchForm = document.getElementById('searchForm');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                searchItem();
+            });
+        }
+    });
+
     function checkAuth() {
         const userId = localStorage.getItem("pfm_userId");
         if (!userId) {
@@ -862,7 +755,7 @@
     }
     window.addEventListener('load', () => {
         loadCartCount();
-        loadBestSellingProducts();
+        // loadBestSellingProducts();
     });
 </script>
 

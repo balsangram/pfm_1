@@ -4,14 +4,29 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Priya Fresh Meats</title>
-    <meta name="description" content="Bemet - Butcher & Meat Shop HTML Template">
+    <title>Priya Fresh Meats - Order Status</title>
+    <meta name="description" content="Track your order status with real-time updates">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/pfm-logo2 (1)2.png">
-    <!-- Place favicon.ico in the root directory -->
 
-    <!-- CSS here -->
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#dc3545', // Red for current/active
+                        success: '#28a745', // Green for completed
+                        gray: '#6c757d', // Gray for pending
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
@@ -23,11 +38,21 @@
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <style>
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
 </head>
 
-<body>
-
-    <!-- preloader -->
+<body class="bg-gray-50 font-sans">
     <div id="preloader">
         <div id="loading-center">
             <div class="loader">
@@ -47,7 +72,6 @@
     <!-- header-area -->
     <header class="transparent-header">
         <div class="header-top-wrap">
-
             <div class="container custom-container">
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-8">
@@ -88,34 +112,29 @@
             </div>
         </div>
         <div id="sticky-header" class="menu-area">
-            <div class="container custom-container">
+            <div class="container custom-container" style="z-index: 999;">
                 <div class="row">
                     <div class="col-12">
                         <div class="menu-wrap">
                             <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
                             <nav class="menu-nav">
                                 <div class="logo">
-                                    <!-- <a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo"></a> -->
                                     <a href="index.html"><img src="assets/img/logo/pfm-logod2 (1)d website.png"
                                             alt="Logo"></a>
                                 </div>
                                 <div class="navbar-wrap main-menu d-none d-lg-flex">
                                     <ul class="navigation">
+                                        <li class="active menu-item-has-children"><a href="index.html">Home</a>
 
-                                        <li><a href="index.html">Home</a></li>
-
-                                        <!-- </li> -->
-                                        <li class="active"><a href="about.html">ABOUT US</a></li>
+                                        </li>
+                                        <li><a href="about.html">ABOUT US</a></li>
                                         <li class="menu-item-has-children">
                                             <a href="shop.html">PRODUCTS</a>
                                         </li>
 
-
                                         </li>
 
-                                        <li class="menu-item-has-children"><a href="services.html">OUR Franchise</a>
-
-                                        </li>
+                                        <li><a href="services.html">Our Franchise</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </div>
@@ -125,10 +144,13 @@
                                             <a href="#"><i class="flaticon-search"></i></a>
                                         </li>
                                         <li class="header-shop-cart">
-                                            <a href="#">
+                                            <a id="cart-link" href="/cart.html">
                                                 <i class="flaticon-shopping-basket"></i>
                                                 <span id="cart-count">0</span>
                                             </a>
+                                        </li>
+                                        <li id="auth-li" class="header-auth">
+                                            <a id="auth-btn" href="signin-page.html" class="btn">Login</a>
                                         </li>
                                         <li class="header-btn"><a href="tel:0123456789" class="btn">+91 9686068687</a>
                                         </li>
@@ -174,6 +196,25 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="search-form">
+                                <form action="#">
+                                    <input id="searchInput" type="text" placeholder="Enter your keyword...">
+                                    <button id="search-btn" class="search-btn"><i class="flaticon-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-backdrop"></div>
+        <!-- header-search-end -->
+        <!-- header-search -->
+        <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="search-wrap text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="search-form">
                                 <form id="searchForm">
                                     <input type="text" id="searchInput" placeholder="Enter your keyword...">
                                     <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
@@ -191,83 +232,161 @@
         <!-- header-search-end -->
 
     </header>
-    <!-- header-area-end -->
 
-
-    <!-- main-area -->
-    <main>
-
-        <!-- breadcrumb-area -->
-
-        <section class="breadcrumb-area tg-motion-effects breadcrumb-bg"
-            data-background="assets/img/pfmImg/contact.png">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="breadcrumb-content">
-                            <h2 class="title">About us</h2>
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">about us</li>
-                                </ol>
-                            </nav>
-                        </div>
+    <section class="breadcrumb-area tg-motion-effects breadcrumb-bg" data-background="assets/img/pfmImg/contact.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">Ordered Page</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Ordered Page</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <!-- Main Content -->
+    <main style="padding:50px 20px;">
 
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" style="max-width:800px; margin:0 auto 40px auto;">
+            <ol style="list-style:none; display:flex; gap:5px; padding:0; color:#555; font-size:14px;">
+                <li><a href="/" style="text-decoration:none; color:#d32f2f;">Home</a></li>
+                <li style="color:#555;">/ Order Status</li>
+            </ol>
+        </nav>
 
+        <!-- Container -->
+        <section
+            style="max-width:800px; margin:0 auto; background-color:#fff; padding:30px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
 
-        <!-- faq-area -->
-        <section class="faq-area tg-motion-effects faq-bg" data-background="assets/img/bg/faq_bg.jpg">
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-lg-6 col-md-10">
-                        <div class="">
-                            <img src="assets/img/logo//pfm-logod2 (1)d website.png" alt="">
-                            <!-- <img src="assets/img/images/faq_img02.png" alt="">
-                            <img src="assets/img/images/faq_img03.png" alt=""> -->
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="faq-content">
-                            <div class="section-title mb-60">
-                                <span class="sub-title">About Us</span>
-                                <h2 class="title">Expertise in Premium Poultry</h2>
-                            </div>
-                            <div class="faq-wrap">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
-                                                At Priya Fresh Chicken, we pride ourselves on delivering naturally
-                                                tender, farm-fresh chicken. Our deep understanding of sourcing, hygiene,
-                                                and customer satisfaction ensures top-quality products for every meal.
-                                            </button>
-                                        </h2>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Header -->
+            <div style="text-align:center; margin-bottom:40px;">
+                <h1 style="margin:0 0 10px 0; color:#333;">Order Status</h1>
+                <p style="margin:0; color:#666;">Track your order in real-time</p>
+                <div
+                    style="margin:20px auto; width:40px; height:40px; border:4px solid #d32f2f; border-top:4px solid transparent; border-radius:50%; animation:spin 1s linear infinite;">
                 </div>
             </div>
-            <div class="faq-shape-wrap">
-                <img src="assets/img/images/faq_shape01.png" alt="" class="tg-motion-effects3">
-                <img src="assets/img/images/faq_shape02.png" alt="" class="tg-motion-effects2">
-            </div>
-        </section>
-        <!-- faq-area-end -->
 
+            <!-- Order Details -->
+            <div id="order-details" style="display:none; margin-bottom:30px;">
+                <h3 style="margin-bottom:15px; color:#d32f2f;">Order #<span id="order-id"></span></h3>
+                <div
+                    style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
+                    <span style="font-weight:bold;">Date:</span> <span id="order-date"></span>
+                </div>
+                <div
+                    style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
+                    <span style="font-weight:bold;">Total:</span> ₹<span id="order-total"></span>
+                </div>
+                <div
+                    style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
+                    <span style="font-weight:bold;">Status:</span> <span id="current-status"></span>
+                </div>
+                <div
+                    style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
+                    <span style="font-weight:bold;">Payment:</span> <span id="payment-method"></span>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div style="position:relative; margin-top:30px;">
+
+                <!-- Timeline step -->
+                <div style="display:flex; position:relative; margin-bottom:30px;">
+                    <div
+                        style="width:40px; height:40px; border-radius:50%; background-color:#d32f2f; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
+                        <i class="fas fa-file-alt" style="width:18px; height:18px; text-align:center;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Pending</h4>
+                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order received and being processed</p>
+                    </div>
+                    <div
+                        style="position:absolute; left:20px; top:45px; width:2px; height:100%; background-color:#d32f2f;">
+                    </div>
+                </div>
+
+                <div style="display:flex; position:relative; margin-bottom:30px;">
+                    <div
+                        style="width:40px; height:40px; border-radius:50%; background-color:#d32f2f; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
+                        <i class="fas fa-check-circle" style="width:18px; height:18px; text-align:center;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Accepted</h4>
+                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order accepted by the team</p>
+                    </div>
+                    <div
+                        style="position:absolute; left:20px; top:45px; width:2px; height:100%; background-color:#d32f2f;">
+                    </div>
+                </div>
+
+                <div style="display:flex; position:relative; margin-bottom:30px;">
+                    <div
+                        style="width:40px; height:40px; border-radius:50%; background-color:#fff; border:2px solid #d32f2f; display:flex; align-items:center; justify-content:center; color:#d32f2f; margin-right:15px; flex-shrink:0; font-size:16px;">
+                        <i class="fas fa-shopping-bag" style="width:18px; height:18px; text-align:center;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Picked Up</h4>
+                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order picked up from store</p>
+                    </div>
+                    <div
+                        style="position:absolute; left:20px; top:45px; width:2px; height:100%; background-color:#d32f2f;">
+                    </div>
+                </div>
+
+                <div style="display:flex; position:relative; margin-bottom:30px;">
+                    <div
+                        style="width:40px; height:40px; border-radius:50%; background-color:#ccc; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
+                        <i class="fas fa-truck" style="width:18px; height:18px; text-align:center;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">In Transit</h4>
+                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order on the way to delivery</p>
+                    </div>
+                    <div
+                        style="position:absolute; left:20px; top:45px; width:2px; height:100%; background-color:#d32f2f;">
+                    </div>
+                </div>
+
+                <div style="display:flex; position:relative; margin-bottom:30px;">
+                    <div
+                        style="width:40px; height:40px; border-radius:50%; background-color:#ccc; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
+                        <i class="fas fa-home" style="width:18px; height:18px; text-align:center;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Delivered</h4>
+                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order successfully delivered</p>
+                    </div>
+                </div>
+
+                <div style="display:flex; position:relative; margin-bottom:30px;">
+                    <div
+                        style="width:40px; height:40px; border-radius:50%; background-color:#ccc; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
+                        <i class="fas fa-times-circle" style="width:18px; height:18px; text-align:center;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Rejected</h4>
+                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order rejected (if applicable)</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Contact Button -->
+            <a href="/contact"
+                style="display:block; width:200px; margin:40px auto 0; padding:12px; text-align:center; text-decoration:none; background-color:#d32f2f; color:#fff; border-radius:30px;">Contact
+                Support</a>
+
+        </section>
     </main>
-    <!-- main-area-end -->
-
-    <!-- footer-area -->
+    <!-- Footer -->
     <footer>
         <div class="footer-area">
             <div class="footer-logo-area">
@@ -412,7 +531,6 @@
         </div>
         </div>
     </footer>
-    <!-- footer-area-end -->
 
     <!-- JS here -->
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
@@ -430,208 +548,112 @@
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
 
-</body>
-<script>
-    const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
+    <!-- Custom JS for Order Status -->
+    <script>
+        const BASE_URL = "https://api.priyafreshmeats.com";
 
-    const newsletterForm = document.getElementById("newsletterForm");
-    const newsletterMessage = document.getElementById("newsletterMessage");
+        // Timeline stages
+        const stages = [
+            { id: 'pending', icon: 'fas fa-file-alt', title: 'Pending', description: 'Order received and being processed' },
+            { id: 'accepted', icon: 'fas fa-check-circle', title: 'Accepted', description: 'Order accepted by the team' },
+            { id: 'picked_up', icon: 'fas fa-shopping-bag', title: 'Picked Up', description: 'Order picked up from store' },
+            { id: 'in_transit', icon: 'fas fa-truck', title: 'In Transit', description: 'Order on the way to delivery' },
+            { id: 'delivered', icon: 'fas fa-home', title: 'Delivered', description: 'Order successfully delivered' },
+            { id: 'rejected', icon: 'fas fa-times-circle', title: 'Rejected', description: 'Order rejected (if applicable)' }
+        ];
 
-    newsletterForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent default form submission
-
-        // Here you could also send the email via fetch/AJAX if needed
-        const email = newsletterForm.querySelector('input[type="email"]').value;
-        if (email) {
-            newsletterMessage.style.display = "block"; // Show submitted message
-            newsletterForm.reset(); // Clear input
-        }
-    });
-
-    // Load cart count
-    function loadCartCount() {
-        const customerId = localStorage.getItem('pfm_userId');
-        const authToken = localStorage.getItem('pfm_authToken');
-        const cartCountElement = document.getElementById("cart-count");
-
-        if (!cartCountElement) return; // ✅ Safety check
-
-        // ✅ Ensure no duplicate listeners
-        cartCountElement.onclick = () => {
-            if (!customerId || customerId === '0' || !authToken) {
-                window.location.href = "signin-page.html"; // redirect to login
-            } else {
-                window.location.href = "cart.html"; // go to cart
-            }
+        // Status colors (inline CSS)
+        const statusColors = {
+            pending: 'background-color:#FFD966;color:#805500;',
+            accepted: 'background-color:#9EC5FE;color:#0645AD;',
+            picked_up: 'background-color:#C6F6D5;color:#065F46;',
+            in_transit: 'background-color:#D9E7FF;color:#1E3A8A;',
+            delivered: 'background-color:#C6F6D5;color:#065F46;',
+            rejected: 'background-color:#FCA5A5;color:#B91C1C;'
         };
 
-        // ✅ Default count
-        cartCountElement.textContent = '0';
+        document.addEventListener('DOMContentLoaded', loadOrderStatus);
 
-        if (!customerId || customerId === '0' || !authToken) return; // stop here if user not logged in
+        function loadOrderStatus() {
+            const orderId = '68e4f1658aa6d5da6bf307f4'; // Replace with dynamic param if needed
+            const authToken = localStorage.getItem('pfm_authToken');
+            const container = document.getElementById('order-status-container');
 
-        fetch(`${BASE_URL}/customer/cart/${customerId}`, {
-            headers: { 'Authorization': `Bearer ${authToken}` }
-        })
-            .then(res => res.json())
-            .then(data => {
-                const cartItems = data.data || [];
-                cartCountElement.textContent = cartItems.length.toString();
+            if (!authToken) {
+                container.innerHTML = `<div style="text-align:center;color:#B91C1C;">
+            <p>Please log in to view order status.</p>
+            <a href="signin-page.html" style="display:inline-block;margin-top:10px;padding:8px 16px;background-color:#2563EB;color:#fff;border-radius:5px;text-decoration:none;">Login</a>
+        </div>`;
+                return;
+            }
+
+            fetch(`${BASE_URL}/customer/order-status/${orderId}`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
             })
-            .catch(err => {
-                console.error("Error fetching cart count:", err);
-                cartCountElement.textContent = '0';
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.data) {
+                        displayOrderStatus(data.data);
+                    } else {
+                        container.innerHTML = `<div style="text-align:center;padding:20px;color:#B91C1C;">
+                <p>Order not found or error occurred.</p>
+            </div>`;
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    container.innerHTML = `<div style="text-align:center;padding:20px;color:#B91C1C;">
+            <p>Failed to load order status. Please try again.</p>
+        </div>`;
+                });
+        }
+
+        function displayOrderStatus(order) {
+            const container = document.getElementById('order-status-container');
+            const currentStatus = order.status || 'pending';
+
+            // Update order details
+            const orderDetailsHTML = `
+        <div id="order-details" style="margin-bottom:20px;padding:15px;border-radius:8px;background-color:#F9FAFB;">
+            <h3 style="margin-bottom:10px;color:#111;font-size:18px;">Order #${order._id || order.id}</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:14px;color:#555;">
+                <div><strong>Date:</strong> ${new Date(order.createdAt).toLocaleDateString()}</div>
+                <div><strong>Total:</strong> ₹${(order.finalAmount || 0).toFixed(2)}</div>
+                <div><strong>Status:</strong> <span style="display:inline-block;padding:2px 6px;border-radius:5px;${statusColors[currentStatus] || 'background-color:#E5E7EB;color:#374151;'}">${currentStatus.toUpperCase()}</span></div>
+                <div><strong>Payment:</strong> ${order.paymentMethod || 'Cash on Delivery'}</div>
+            </div>
+        </div>
+    `;
+
+            // Build timeline
+            let timelineHTML = '';
+            stages.forEach((stage, index) => {
+                const stageIndex = stages.findIndex(s => s.id === currentStatus);
+                let circleColor = index < stageIndex ? '#16A34A' : index === stageIndex ? '#2563EB' : '#D1D5DB';
+                let iconColor = index <= stageIndex ? '#FFFFFF' : '#6B7280';
+                timelineHTML += `
+            <div style="display:flex;position:relative;margin-bottom:25px;">
+                <div style="width:40px;height:40px;border-radius:50%;background-color:${circleColor};display:flex;align-items:center;justify-content:center;margin-right:15px;flex-shrink:0;">
+                    <i class="${stage.icon}" style="color:${iconColor};font-size:16px;"></i>
+                </div>
+                <div>
+                    <h4 style="margin:0;color:${index <= stageIndex ? '#2563EB' : '#374151'};font-size:16px;">${stage.title}</h4>
+                    <p style="margin:5px 0 0;color:#555;font-size:14px;">${stage.description}</p>
+                </div>
+                ${index < stages.length - 1 ? `<div style="position:absolute;left:20px;top:45px;width:2px;height:100%;background-color:${index < stageIndex ? '#16A34A' : '#D1D5DB'};"></div>` : ''}
+            </div>
+        `;
             });
-    }
 
-
-    function checkAuth() {
-        const userId = localStorage.getItem("pfm_userId");
-        if (!userId) {
-            window.location.href = "signin-page.html";
-            return false;
+            container.innerHTML = orderDetailsHTML + `<div class="order-timeline">${timelineHTML}</div>` + `
+        <div style="text-align:center;margin-top:20px;">
+            <a href="contact.html" style="display:inline-block;padding:10px 20px;background-color:#B91C1C;color:#fff;border-radius:25px;text-decoration:none;">Contact Support</a>
+        </div>
+    `;
         }
-        return true;
-    }
+    </script>
 
-    function searchItem() {
-        if (!checkAuth()) return;
 
-        const name = document.getElementById("searchInput").value.trim();
-        if (!name) {
-            alert("Please enter something to search");
-            return;
-        }
-
-        fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log("Search Result:", data);
-                const resultContainer = document.getElementById("result");
-
-                // Clear previous results
-                resultContainer.innerHTML = "";
-
-                // Set white background and scrollable container
-                resultContainer.style.cssText = `
-                max-height: 400px;
-                overflow-y: auto;
-                background: #EFE8D9;
-                border-radius: 8px;
-                padding: 10px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            `;
-
-                if (data.success && data.data && data.data.length > 0) {
-                    data.data.forEach(item => {
-                        const div = document.createElement("div");
-                        div.className = "search-item-card";
-                        div.style.cssText = `
-                        display: flex; 
-                        align-items: center; 
-                        padding: 10px; 
-                        margin-bottom: 8px; 
-                        border-radius: 6px; 
-                        background: #f9f9f9; 
-                        transition: transform 0.2s, background 0.2s;
-                        cursor: pointer;
-                    `;
-
-                        div.onmouseover = () => {
-                            div.style.background = "#f1f1f1";
-                            div.style.transform = "translateY(-2px)";
-                        };
-                        div.onmouseout = () => {
-                            div.style.background = "#f9f9f9";
-                            div.style.transform = "translateY(0)";
-                        };
-
-                        div.innerHTML = `
-                        <img src="${item.img || 'assets/img/placeholder.png'}" alt="${item.name}" 
-                             style="width: 50px; height: 50px; object-fit: cover; margin-right: 12px; border-radius: 4px; border: 1px solid #ddd;">
-                        <div style="flex: 1;">
-                            <h5 style="margin: 0; color: #333; font-weight: 600;">
-                                <a href="shop-details.html?id=${item.id}" style="color: #333; text-decoration: none;">
-                                    ${item.name}
-                                </a>
-                            </h5>
-                            <p style="margin: 4px 0 0 0; color: #555; font-size: 14px;">
-                                Price: ₹${(item.discountPrice || item.price).toFixed(2)}
-                            </p>
-                        </div>
-                    `;
-
-                        resultContainer.appendChild(div);
-                    });
-                } else {
-                    resultContainer.innerHTML = `
-                    <p style="color: #333; text-align: center; margin-top: 20px;">
-                        No items found.
-                    </p>
-                `;
-                }
-            })
-            .catch(err => console.error("Error searching items:", err));
-    }
-
-    // Attach event listener to the search form
-    document.addEventListener('DOMContentLoaded', function () {
-        const searchForm = document.getElementById('searchForm');
-        if (searchForm) {
-            searchForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                searchItem();
-            });
-        }
-    });
-
-    function loadBestSellingProducts() {
-        if (!checkAuth()) return;
-
-        const userId = localStorage.getItem("pfm_userId");
-
-        fetch(`${BASE_URL}/customer/bestSellingProducts/user/${userId}`)
-            .then(res => res.json())
-            .then(response => {
-                console.log("Best Selling Products Response:", response);
-                const container = document.querySelector('.product-area-two .row.justify-content-center');
-                if (response.success && response.data && response.data.length > 0 && container) {
-                    container.innerHTML = '';
-                    const products = response.data.slice(0, 4);
-                    products.forEach(product => {
-                        const colDiv = document.createElement('div');
-                        colDiv.className = 'col-lg-6 col-md-10';
-                        colDiv.innerHTML = `
-                    <div class="product-item-two">
-                        <div class="product-img-two">
-                            <a href="shop-details.html">
-                                <img src="${product.img}" alt="${product.name}" style="height: 12rem; width: 100%; object-fit: cover;">
-                            </a>
-                        </div>
-                        <div class="product-content-two">
-                            <div class="product-info">
-                                <h4 class="title"><a href="shop-details.html">${product.name}</a></h4>
-                                <p>${product.description || 'Fresh and organic product, perfect for your meals.'}</p>
-                            </div>
-                            <div class="product-price">
-                                <h5 class="price">₹${(product.discountPrice || product.price).toFixed(2)}</h5>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                        container.appendChild(colDiv);
-                    });
-                } else {
-                    console.warn("No best-selling products found or API error");
-                    if (container) container.innerHTML = '<p>No products found.</p>';
-                }
-            })
-            .catch(err => console.error("Error fetching best-selling products:", err));
-    }
-    window.addEventListener('load', () => {
-        // loadBestSellingProducts();
-        loadCartCount();
-    });
-</script>
+</body>
 
 </html>

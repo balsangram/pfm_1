@@ -186,7 +186,9 @@
                                         </li>
                                         <li class="header-shop-cart">
                                             <a href="#">
-                                                <i class="flaticon-shopping-basket"></i>
+                                                <i class="flaticon-shopping-basket" id="cart-icon"
+                                                    style="cursor:pointer;"></i>
+
                                                 <span id="cart-count">0</span>
                                             </a>
                                         </li>
@@ -404,10 +406,12 @@
                             <li class="order-lg-3">
                                 <div class="footer-newsletter">
                                     <h4 class="title">Our Newsletter</h4>
-                                    <form action="#">
-                                        <input type="email" placeholder="Enter your email...">
-                                        <button type="submit">subscribe</button>
+                                    <form id="newsletterForm">
+                                        <input type="email" placeholder="Enter your email..." required>
+                                        <button type="submit">Subscribe</button>
                                     </form>
+                                    <p id="newsletterMessage" style="margin-top:8px; color:green; display:none;">
+                                        Submitted!</p>
                                 </div>
                             </li>
                         </ul>
@@ -543,15 +547,41 @@
 <script>
     const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
 
+    const newsletterForm = document.getElementById("newsletterForm");
+    const newsletterMessage = document.getElementById("newsletterMessage");
+
+    newsletterForm.addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Here you could also send the email via fetch/AJAX if needed
+        const email = newsletterForm.querySelector('input[type="email"]').value;
+        if (email) {
+            newsletterMessage.style.display = "block"; // Show submitted message
+            newsletterForm.reset(); // Clear input
+        }
+    });
+
     // Load cart count
     function loadCartCount() {
-        const customerId = localStorage.getItem('pfm_userId') || '0';
-        const authToken = localStorage.getItem('pfm_authToken') || '';
+        const customerId = localStorage.getItem('pfm_userId');
+        const authToken = localStorage.getItem('pfm_authToken');
         const cartCountElement = document.getElementById("cart-count");
 
+        if (!cartCountElement) return; // ✅ Safety check
+
+        // ✅ Ensure no duplicate listeners
+        cartCountElement.onclick = () => {
+            if (!customerId || customerId === '0' || !authToken) {
+                window.location.href = "signin-page.html"; // redirect to login
+            } else {
+                window.location.href = "cart.html"; // go to cart
+            }
+        };
+
+        // ✅ Default count
         cartCountElement.textContent = '0';
 
-        if (customerId === '0' || !authToken) return;
+        if (!customerId || customerId === '0' || !authToken) return; // stop here if user not logged in
 
         fetch(`${BASE_URL}/customer/cart/${customerId}`, {
             headers: { 'Authorization': `Bearer ${authToken}` }
@@ -566,7 +596,6 @@
                 cartCountElement.textContent = '0';
             });
     }
-
     // Check if user is logged in
     function checkAuth() {
         const userId = localStorage.getItem("pfm_userId");
@@ -576,6 +605,97 @@
         }
         return true;
     }
+
+    function searchItem() {
+        if (!checkAuth()) return;
+
+        const name = document.getElementById("searchInput").value.trim();
+        if (!name) {
+            alert("Please enter something to search");
+            return;
+        }
+
+        fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("Search Result:", data);
+                const resultContainer = document.getElementById("result");
+
+                // Clear previous results
+                resultContainer.innerHTML = "";
+
+                // Set white background and scrollable container
+                resultContainer.style.cssText = `
+                max-height: 400px;
+                overflow-y: auto;
+                background: #EFE8D9;
+                border-radius: 8px;
+                padding: 10px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            `;
+
+                if (data.success && data.data && data.data.length > 0) {
+                    data.data.forEach(item => {
+                        const div = document.createElement("div");
+                        div.className = "search-item-card";
+                        div.style.cssText = `
+                        display: flex; 
+                        align-items: center; 
+                        padding: 10px; 
+                        margin-bottom: 8px; 
+                        border-radius: 6px; 
+                        background: #f9f9f9; 
+                        transition: transform 0.2s, background 0.2s;
+                        cursor: pointer;
+                    `;
+
+                        div.onmouseover = () => {
+                            div.style.background = "#f1f1f1";
+                            div.style.transform = "translateY(-2px)";
+                        };
+                        div.onmouseout = () => {
+                            div.style.background = "#f9f9f9";
+                            div.style.transform = "translateY(0)";
+                        };
+
+                        div.innerHTML = `
+                        <img src="${item.img || 'assets/img/placeholder.png'}" alt="${item.name}" 
+                             style="width: 50px; height: 50px; object-fit: cover; margin-right: 12px; border-radius: 4px; border: 1px solid #ddd;">
+                        <div style="flex: 1;">
+                            <h5 style="margin: 0; color: #333; font-weight: 600;">
+                                <a href="shop-details.html?id=${item.id}" style="color: #333; text-decoration: none;">
+                                    ${item.name}
+                                </a>
+                            </h5>
+                            <p style="margin: 4px 0 0 0; color: #555; font-size: 14px;">
+                                Price: ₹${(item.discountPrice || item.price).toFixed(2)}
+                            </p>
+                        </div>
+                    `;
+
+                        resultContainer.appendChild(div);
+                    });
+                } else {
+                    resultContainer.innerHTML = `
+                    <p style="color: #333; text-align: center; margin-top: 20px;">
+                        No items found.
+                    </p>
+                `;
+                }
+            })
+            .catch(err => console.error("Error searching items:", err));
+    }
+
+    // Attach event listener to the search form
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchForm = document.getElementById('searchForm');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                searchItem();
+            });
+        }
+    });
 
     // Load best-selling products
     function loadBestSellingProducts() {
@@ -651,9 +771,27 @@
             .catch(err => console.error("Error searching items:", err));
     }
 
+    function setupCartIcon() {
+
+
+        const customerId = localStorage.getItem('pfm_userId');
+        const authToken = localStorage.getItem('pfm_authToken');
+        const cartIcon = document.getElementById("cart-icon");
+
+        if (!cartIcon) return; // Safety check
+
+        cartIcon.onclick = () => {
+            if (!customerId || customerId === '0' || !authToken) {
+                window.location.href = "signin-page.html"; // Redirect to login
+            } else {
+                window.location.href = "cart.html"; // Go to cart
+            }
+        };
+    }
+
     window.addEventListener('load', () => {
         loadCartCount();
-        loadBestSellingProducts();
+        // loadBestSellingProducts();
     });
 </script>
 
