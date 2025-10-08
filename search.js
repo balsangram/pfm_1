@@ -1,5 +1,5 @@
 
-console.log("pfm");
+console.log("pfm search.js loaded   ");
 
 function searchItem() {
     if (!checkAuth()) return;
