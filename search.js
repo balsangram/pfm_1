@@ -1,3 +1,6 @@
+
+console.log("pfm");
+
 function searchItem() {
     if (!checkAuth()) return;
 
