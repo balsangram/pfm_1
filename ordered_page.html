@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="navbar-wrap main-menu d-none d-lg-flex">
                                     <ul class="navigation">
-                                        <li class="active menu-item-has-children"><a href="index.html">Home</a>
+                                        <li class=" menu-item-has-children"><a href="index.html">Home</a>
 
                                         </li>
                                         <li><a href="about.html">ABOUT US</a></li>
@@ -149,9 +149,9 @@
                                                 <span id="cart-count">0</span>
                                             </a>
                                         </li>
-                                        <li id="auth-li" class="header-auth">
+                                        <!-- <li id="auth-li" class="header-auth">
                                             <a id="auth-btn" href="signin-page.html" class="btn">Login</a>
-                                        </li>
+                                        </li> -->
                                         <li class="header-btn"><a href="tel:0123456789" class="btn">+91 9686068687</a>
                                         </li>
                                     </ul>
@@ -268,10 +268,10 @@
             <!-- Header -->
             <div style="text-align:center; margin-bottom:40px;">
                 <h1 style="margin:0 0 10px 0; color:#333;">Order Status</h1>
-                <p style="margin:0; color:#666;">Track your order in real-time</p>
+                <!-- <p style="margin:0; color:#666;">Track your order in real-time</p>
                 <div
                     style="margin:20px auto; width:40px; height:40px; border:4px solid #d32f2f; border-top:4px solid transparent; border-radius:50%; animation:spin 1s linear infinite;">
-                </div>
+                </div> -->
             </div>
 
             <!-- Order Details -->
@@ -283,7 +283,8 @@
                 </div>
                 <div
                     style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
-                    <span style="font-weight:bold;">Total:</span> ₹<span id="order-total"></span>
+                    <span style="font-weight:bold;">Amount:</span> <span style="display: flex;"> ₹<span
+                            id="order-amount"></span></span>
                 </div>
                 <div
                     style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
@@ -291,96 +292,30 @@
                 </div>
                 <div
                     style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
+                    <span style="font-weight:bold;">Delivery Status:</span> <span id="delivery-status"></span>
+                </div>
+                <div
+                    style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
+                    <span style="font-weight:bold;">Location:</span> <span id="order-location"></span>
+                </div>
+                <div
+                    style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#555;">
                     <span style="font-weight:bold;">Payment:</span> <span id="payment-method"></span>
                 </div>
             </div>
 
-            <!-- Timeline -->
-            <div style="position:relative; margin-top:30px;">
-
-                <!-- Timeline step -->
-                <div style="display:flex; position:relative; margin-bottom:30px;">
-                    <div
-                        style="width:40px; height:40px; border-radius:50%; background-color:#d32f2f; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
-                        <i class="fas fa-file-alt" style="width:18px; height:18px; text-align:center;"></i>
-                    </div>
-                    <div>
-                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Pending</h4>
-                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order received and being processed</p>
-                    </div>
-                    <div
-                        style="position:absolute; left:20px; top:45px; width:2px; height:100%; background-color:#d32f2f;">
-                    </div>
-                </div>
-
-                <div style="display:flex; position:relative; margin-bottom:30px;">
-                    <div
-                        style="width:40px; height:40px; border-radius:50%; background-color:#d32f2f; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
-                        <i class="fas fa-check-circle" style="width:18px; height:18px; text-align:center;"></i>
-                    </div>
-                    <div>
-                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Accepted</h4>
-                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order accepted by the team</p>
-                    </div>
-                    <div
-                        style="position:absolute; left:20px; top:45px; width:2px; height:100%; background-color:#d32f2f;">
-                    </div>
-                </div>
-
-                <div style="display:flex; position:relative; margin-bottom:30px;">
-                    <div
-                        style="width:40px; height:40px; border-radius:50%; background-color:#fff; border:2px solid #d32f2f; display:flex; align-items:center; justify-content:center; color:#d32f2f; margin-right:15px; flex-shrink:0; font-size:16px;">
-                        <i class="fas fa-shopping-bag" style="width:18px; height:18px; text-align:center;"></i>
-                    </div>
-                    <div>
-                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Picked Up</h4>
-                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order picked up from store</p>
-                    </div>
-                    <div
-                        style="position:absolute; left:20px; top:45px; width:2px; height:100%; background-color:#d32f2f;">
-                    </div>
-                </div>
-
-                <div style="display:flex; position:relative; margin-bottom:30px;">
-                    <div
-                        style="width:40px; height:40px; border-radius:50%; background-color:#ccc; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
-                        <i class="fas fa-truck" style="width:18px; height:18px; text-align:center;"></i>
-                    </div>
-                    <div>
-                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">In Transit</h4>
-                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order on the way to delivery</p>
-                    </div>
-                    <div
-                        style="position:absolute; left:20px; top:45px; width:2px; height:100%; background-color:#d32f2f;">
-                    </div>
-                </div>
-
-                <div style="display:flex; position:relative; margin-bottom:30px;">
-                    <div
-                        style="width:40px; height:40px; border-radius:50%; background-color:#ccc; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
-                        <i class="fas fa-home" style="width:18px; height:18px; text-align:center;"></i>
-                    </div>
-                    <div>
-                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Delivered</h4>
-                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order successfully delivered</p>
-                    </div>
-                </div>
-
-                <div style="display:flex; position:relative; margin-bottom:30px;">
-                    <div
-                        style="width:40px; height:40px; border-radius:50%; background-color:#ccc; display:flex; align-items:center; justify-content:center; color:#fff; margin-right:15px; flex-shrink:0; font-size:16px;">
-                        <i class="fas fa-times-circle" style="width:18px; height:18px; text-align:center;"></i>
-                    </div>
-                    <div>
-                        <h4 style="margin:0; color:#d32f2f; font-size:16px;">Rejected</h4>
-                        <p style="margin:5px 0 0; color:#555; font-size:14px;">Order rejected (if applicable)</p>
-                    </div>
-                </div>
-
+            <!-- Order Items -->
+            <div id="order-items" style="display:none; margin-bottom:30px;">
+                <h4 style="margin-bottom:15px; color:#d32f2f;">Order Details</h4>
+                <ul id="items-list" style="list-style:none; padding:0;">
+                </ul>
             </div>
 
+            <!-- Dynamic Timeline Container -->
+            <div id="order-status-container" style="position:relative; margin-top:30px;"></div>
+
             <!-- Contact Button -->
-            <a href="/contact"
+            <a href="/contact.html"
                 style="display:block; width:200px; margin:40px auto 0; padding:12px; text-align:center; text-decoration:none; background-color:#d32f2f; color:#fff; border-radius:30px;">Contact
                 Support</a>
 
@@ -556,26 +491,21 @@
         const stages = [
             { id: 'pending', icon: 'fas fa-file-alt', title: 'Pending', description: 'Order received and being processed' },
             { id: 'accepted', icon: 'fas fa-check-circle', title: 'Accepted', description: 'Order accepted by the team' },
-            { id: 'picked_up', icon: 'fas fa-shopping-bag', title: 'Picked Up', description: 'Order picked up from store' },
-            { id: 'in_transit', icon: 'fas fa-truck', title: 'In Transit', description: 'Order on the way to delivery' },
-            { id: 'delivered', icon: 'fas fa-home', title: 'Delivered', description: 'Order successfully delivered' },
             { id: 'rejected', icon: 'fas fa-times-circle', title: 'Rejected', description: 'Order rejected (if applicable)' }
         ];
 
-        // Status colors (inline CSS)
+        // Status colors (inline CSS) - Pending set to red
         const statusColors = {
-            pending: 'background-color:#FFD966;color:#805500;',
+            pending: 'background-color:#FCA5A5;color:#B91C1C;',
             accepted: 'background-color:#9EC5FE;color:#0645AD;',
-            picked_up: 'background-color:#C6F6D5;color:#065F46;',
-            in_transit: 'background-color:#D9E7FF;color:#1E3A8A;',
-            delivered: 'background-color:#C6F6D5;color:#065F46;',
-            rejected: 'background-color:#FCA5A5;color:#B91C1C;'
+            rejected: 'background-color:#FCA5A5;color:#B91C1C;',
+            ready: 'background-color:#9EC5FE;color:#0645AD;'
         };
 
         document.addEventListener('DOMContentLoaded', loadOrderStatus);
 
         function loadOrderStatus() {
-            const orderId = '68e4f1658aa6d5da6bf307f4'; // Replace with dynamic param if needed
+            const orderId = localStorage.getItem('pfm_orderId'); // Replace with dynamic param if needed
             const authToken = localStorage.getItem('pfm_authToken');
             const container = document.getElementById('order-status-container');
 
@@ -608,48 +538,90 @@
                 });
         }
 
-        function displayOrderStatus(order) {
-            const container = document.getElementById('order-status-container');
-            const currentStatus = order.status || 'pending';
+        function displayOrderStatus(orderData) {
+            const displayOrder = orderData.displayOrder || {};
+            const currentStatus = orderData.status || 'pending';
+            const deliveryStatus = orderData.deliveryStatus || 'pending';
+            const stagesObj = orderData.stages || {};
 
-            // Update order details
-            const orderDetailsHTML = `
-        <div id="order-details" style="margin-bottom:20px;padding:15px;border-radius:8px;background-color:#F9FAFB;">
-            <h3 style="margin-bottom:10px;color:#111;font-size:18px;">Order #${order._id || order.id}</h3>
-            <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:14px;color:#555;">
-                <div><strong>Date:</strong> ${new Date(order.createdAt).toLocaleDateString()}</div>
-                <div><strong>Total:</strong> ₹${(order.finalAmount || 0).toFixed(2)}</div>
-                <div><strong>Status:</strong> <span style="display:inline-block;padding:2px 6px;border-radius:5px;${statusColors[currentStatus] || 'background-color:#E5E7EB;color:#374151;'}">${currentStatus.toUpperCase()}</span></div>
-                <div><strong>Payment:</strong> ${order.paymentMethod || 'Cash on Delivery'}</div>
-            </div>
-        </div>
-    `;
+            // Dynamically filter stages: include 'rejected' only if stagesObj.rejected is true
+            const dynamicStages = stages.filter(stage => stage.id !== 'rejected' || stagesObj.rejected === true);
+            const stageKeys = dynamicStages.map(s => s.id);
+            let stageIndex = -1;
+            for (let i = 0; i < stageKeys.length; i++) {
+                if (stagesObj[stageKeys[i]]) {
+                    stageIndex = i;
+                }
+            }
+            const currentStageId = stageIndex >= 0 ? stageKeys[stageIndex] : 'pending';
+
+            // Determine colors for current stage
+            let currentCircleColor = '#2563EB';
+            let currentTextColor = '#2563EB';
+            if (currentStageId === 'pending' || currentStageId === 'rejected') {
+                currentCircleColor = '#B91C1C';
+                currentTextColor = '#B91C1C';
+            }
+
+            // Update order details (show it)
+            document.getElementById('order-details').style.display = 'block';
+            document.getElementById('order-id').textContent = displayOrder._id || orderData.orderId;
+            document.getElementById('order-date').textContent = new Date(displayOrder.createdAt).toLocaleDateString();
+            document.getElementById('order-amount').textContent = displayOrder.amount || 0;
+            document.getElementById('current-status').innerHTML = `<span style="display:inline-block;padding:2px 6px;border-radius:5px;${statusColors[currentStatus] || 'background-color:#E5E7EB;color:#374151;'}">${currentStatus.toUpperCase()}</span>`;
+            document.getElementById('delivery-status').innerHTML = `<span style="display:inline-block;padding:2px 6px;border-radius:5px;${statusColors[deliveryStatus] || 'background-color:#E5E7EB;color:#374151;'}">${deliveryStatus.toUpperCase()}</span>`;
+            document.getElementById('order-location').textContent = displayOrder.location || '';
+            document.getElementById('payment-method').textContent = displayOrder.paymentMethod || 'Cash on Delivery';
+
+            // Display order items
+            const itemsList = document.getElementById('items-list');
+            const orderItemsSection = document.getElementById('order-items');
+            if (displayOrder.orderDetails && displayOrder.orderDetails.length > 0) {
+                orderItemsSection.style.display = 'block';
+                itemsList.innerHTML = displayOrder.orderDetails.map(item => `
+                    <li style="padding:8px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;">
+                        <span>${item.name} - Qty: ${item.quantity}</span>
+                        <span>₹${(item.price * item.quantity).toFixed(2)}</span>
+                    </li>
+                `).join('');
+            }
 
             // Build timeline
             let timelineHTML = '';
-            stages.forEach((stage, index) => {
-                const stageIndex = stages.findIndex(s => s.id === currentStatus);
-                let circleColor = index < stageIndex ? '#16A34A' : index === stageIndex ? '#2563EB' : '#D1D5DB';
-                let iconColor = index <= stageIndex ? '#FFFFFF' : '#6B7280';
+            dynamicStages.forEach((stage, index) => {
+                const isCompleted = index < stageIndex;
+                const isCurrent = index === stageIndex;
+                let circleColor, iconColor, textColor, lineColor;
+                if (isCompleted) {
+                    circleColor = '#16A34A';
+                    iconColor = '#FFFFFF';
+                    textColor = '#16A34A';
+                } else if (isCurrent) {
+                    circleColor = currentCircleColor;
+                    iconColor = '#FFFFFF';
+                    textColor = currentTextColor;
+                } else {
+                    circleColor = '#D1D5DB';
+                    iconColor = '#6B7280';
+                    textColor = '#374151';
+                }
+                lineColor = isCompleted ? '#16A34A' : '#D1D5DB';
                 timelineHTML += `
             <div style="display:flex;position:relative;margin-bottom:25px;">
                 <div style="width:40px;height:40px;border-radius:50%;background-color:${circleColor};display:flex;align-items:center;justify-content:center;margin-right:15px;flex-shrink:0;">
                     <i class="${stage.icon}" style="color:${iconColor};font-size:16px;"></i>
                 </div>
                 <div>
-                    <h4 style="margin:0;color:${index <= stageIndex ? '#2563EB' : '#374151'};font-size:16px;">${stage.title}</h4>
+                    <h4 style="margin:0;color:${textColor};font-size:16px;">${stage.title}</h4>
                     <p style="margin:5px 0 0;color:#555;font-size:14px;">${stage.description}</p>
                 </div>
-                ${index < stages.length - 1 ? `<div style="position:absolute;left:20px;top:45px;width:2px;height:100%;background-color:${index < stageIndex ? '#16A34A' : '#D1D5DB'};"></div>` : ''}
+                ${index < dynamicStages.length - 1 ? `<div style="position:absolute;left:20px;top:45px;width:2px;height:calc(100% + 25px);background-color:${lineColor};"></div>` : ''}
             </div>
         `;
             });
 
-            container.innerHTML = orderDetailsHTML + `<div class="order-timeline">${timelineHTML}</div>` + `
-        <div style="text-align:center;margin-top:20px;">
-            <a href="contact.html" style="display:inline-block;padding:10px 20px;background-color:#B91C1C;color:#fff;border-radius:25px;text-decoration:none;">Contact Support</a>
-        </div>
-    `;
+            const container = document.getElementById('order-status-container');
+            container.innerHTML = `<div class="order-timeline">${timelineHTML}</div>`;
         }
     </script>
 

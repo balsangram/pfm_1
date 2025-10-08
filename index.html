@@ -795,107 +795,123 @@
     <script src="assets/js/main.js"></script>
 </body>
 
+<script src="./search.js"></script>
+
 <script>
-    const BASE_URL = "https://api.priyafreshmeats.com"; // change if needed
+    const BASE_URL = "https://api.priyafreshmeats.com"; // Change if needed
 
-    const newsletterForm = document.getElementById("newsletterForm");
-    const newsletterMessage = document.getElementById("newsletterMessage");
+    // ========================
+    // 📨 Newsletter Form
+    // ========================
+    document.addEventListener("DOMContentLoaded", () => {
+        const newsletterForm = document.getElementById("newsletterForm");
+        const newsletterMessage = document.getElementById("newsletterMessage");
 
-    newsletterForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent default form submission
-
-        // Here you could also send the email via fetch/AJAX if needed
-        const email = newsletterForm.querySelector('input[type="email"]').value;
-        if (email) {
-            newsletterMessage.style.display = "block"; // Show submitted message
-            newsletterForm.reset(); // Clear input
+        if (newsletterForm) {
+            newsletterForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const email = newsletterForm.querySelector('input[type="email"]').value.trim();
+                if (email) {
+                    newsletterMessage.style.display = "block";
+                    newsletterForm.reset();
+                }
+            });
         }
     });
 
-    // Load cart count
+    // ========================
+    // 🛒 Load Cart Count
+    // ========================
     function loadCartCount() {
-        const customerId = localStorage.getItem('pfm_userId') || '0';
-        const authToken = localStorage.getItem('pfm_authToken') || '';
+        const customerId = localStorage.getItem("pfm_userId") || "0";
+        const authToken = localStorage.getItem("pfm_authToken") || "";
         const cartCountElement = document.getElementById("cart-count");
 
-        cartCountElement.textContent = '0';
+        if (!cartCountElement) return;
+        cartCountElement.textContent = "0";
 
-        if (customerId === '0' || !authToken) return;
+        if (customerId === "0" || !authToken) return;
 
         fetch(`${BASE_URL}/customer/cart/${customerId}`, {
-            headers: { 'Authorization': `Bearer ${authToken}` }
+            headers: { Authorization: `Bearer ${authToken}` },
         })
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 const cartItems = data.data || [];
                 cartCountElement.textContent = cartItems.length.toString();
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error("Error fetching cart count:", err);
-                cartCountElement.textContent = '0';
+                cartCountElement.textContent = "0";
             });
     }
 
-    // Check if user is logged in
+    // ========================
+    // 🔐 Authentication Helpers
+    // ========================
     function checkAuth() {
         const userId = localStorage.getItem("pfm_userId");
         return !!userId;
     }
 
-
-
-    // Update auth button
     function updateAuthButton() {
-        const userId = localStorage.getItem('pfm_userId');
-        const authToken = localStorage.getItem('pfm_authToken');
-        const authBtn = document.getElementById('auth-btn');
+        const userId = localStorage.getItem("pfm_userId");
+        const authToken = localStorage.getItem("pfm_authToken");
+        const authBtn = document.getElementById("auth-btn");
+
+        if (!authBtn) return;
 
         if (userId && authToken) {
-            authBtn.textContent = 'Logout';
-            authBtn.href = '#';
+            authBtn.textContent = "Logout";
+            authBtn.href = "#";
             authBtn.onclick = function (e) {
                 e.preventDefault();
-                if (confirm('Are you sure you want to logout?')) {
-                    localStorage.removeItem('pfm_userId');
-                    localStorage.removeItem('pfm_authToken');
+                if (confirm("Are you sure you want to logout?")) {
+                    localStorage.removeItem("pfm_userId");
+                    localStorage.removeItem("pfm_authToken");
                     location.reload();
                 }
             };
         } else {
-            authBtn.textContent = 'Login';
-            authBtn.href = 'signin-page.html';
+            authBtn.textContent = "Login";
+            authBtn.href = "signin-page.html";
             authBtn.onclick = null;
         }
     }
 
-
-
+    // ========================
+    // 🥩 Load Best Selling Products
+    // ========================
     function loadBestSellingProducts() {
-        console.log("🚀 ~ loadBestSellingProducts ~ called");
+        console.log("🚀 Loading best-selling products...");
         const userId = localStorage.getItem("pfm_userId");
 
         fetch(`${BASE_URL}/customer/bestSellingProducts?userId=${userId}`)
-            .then(res => res.json())
-            .then(response => {
-                console.log("Best Selling Products Response:========", response);
-                const container = document.querySelector('.product-area-two .row.justify-content-center');
+            .then((res) => res.json())
+            .then((response) => {
+                console.log("Best Selling Products Response:", response);
+                const container = document.querySelector(".product-area-two .row.justify-content-center");
 
-                if (response && Array.isArray(response) && response.length > 0 && container) {
-                    container.innerHTML = ''; // clear previous content
+                if (!container) return;
+
+                container.innerHTML = ""; // clear previous content
+
+                if (response && Array.isArray(response) && response.length > 0) {
                     const products = response.slice(0, 4); // show top 4
 
-                    products.forEach(product => {
-                        const colDiv = document.createElement('div');
-                        colDiv.className = 'col-lg-6 col-md-10';
+                    products.forEach((product) => {
+                        const colDiv = document.createElement("div");
+                        colDiv.className = "col-lg-6 col-md-10";
                         colDiv.innerHTML = `
                         <div class="product-item-two">
                             <div class="product-img-two">
-                                <img src="${product.img}" alt="${product.name}" style="height: 12rem; width: 100%; object-fit: cover;">
+                                <img src="${product.img}" alt="${product.name}" 
+                                    style="height: 12rem; width: 100%; object-fit: cover;">
                             </div>
                             <div class="product-content-two">
                                 <div class="product-info">
                                     <h4 class="title">${product.name}</h4>
-                                    <p>${product.description || 'Fresh and organic product, perfect for your meals.'}</p>
+                                    <p>${product.description || "Fresh and organic product, perfect for your meals."}</p>
                                 </div>
                                 <div class="product-price">
                                     <h5 class="price">₹${(product.discountPrice || product.price).toFixed(2)}</h5>
@@ -907,71 +923,30 @@
                     });
                 } else {
                     console.warn("No best-selling products found");
-                    if (container) container.innerHTML = '<p>No products found.</p>';
+                    container.innerHTML = "<p>No products found.</p>";
                 }
             })
-            .catch(err => console.error("Error fetching best-selling products:", err));
+            .catch((err) => console.error("Error fetching best-selling products:", err));
     }
 
-    // Call this function when page loads
-    window.addEventListener('load', () => {
-        loadBestSellingProducts();
-    });
-    // Search function
-    function searchItem() {
-        if (!checkAuth()) {
-            window.location.href = "signin-page.html";
-            return;
-        }
-
-        const name = document.getElementById("searchInput").value.trim();
-        if (!name) {
-            alert("Please enter something to search");
-            return;
-        }
-
-        fetch(`${BASE_URL}/customer/search-item?name=${encodeURIComponent(name)}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log("Search Result:", data);
-                const resultContainer = document.getElementById("result");
-                if (data.success && data.data && data.data.length > 0) {
-                    resultContainer.innerHTML = data.data.map(item => `
-                <div class="search-item">
-                    <h5>${item.name}</h5>
-                    <p>Price: ₹${(item.discountPrice || item.price).toFixed(2)}</p>
-                </div>
-            `).join('');
-                } else {
-                    resultContainer.innerHTML = "<p>No items found.</p>";
-                }
-            })
-            .catch(err => console.error("Error searching items:", err));
-    }
-
-    // Cart link handler
+    // ========================
+    // 🛍 Cart Link Handler
+    // ========================
     function setupCartLink() {
-        const cartLink = document.getElementById('cart-link');
-        if (cartLink) {
-            cartLink.addEventListener('click', function (e) {
-                if (!checkAuth()) {
-                    e.preventDefault();
-                    window.location.href = "signin-page.html";
-                }
-            });
-        }
+        const cartLink = document.getElementById("cart-link");
+        if (!cartLink) return;
+
+        cartLink.addEventListener("click", function (e) {
+            if (!checkAuth()) {
+                e.preventDefault();
+                window.location.href = "signin-page.html";
+            }
+        });
     }
 
-    // Search button handler
-    function setupSearch() {
-        const searchBtn = document.getElementById('search-btn');
-        if (searchBtn) {
-            searchBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                searchItem();
-            });
-        }
-    }
+    // ========================
+    // 📍 Get User Location
+    // ========================
     function getUserLocation(callback) {
         const dummyLocation = { latitude: 12.9716, longitude: 77.5946 }; // Bangalore
 
@@ -980,7 +955,7 @@
                 (position) => {
                     const userLocation = {
                         latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
+                        longitude: position.coords.longitude,
                     };
                     console.log("User location found:", userLocation);
                     callback(userLocation);
@@ -997,28 +972,25 @@
         }
     }
 
-    // Usage: update a DOM element with location
-    window.addEventListener('load', () => {
+    // ========================
+    // 🧩 On Page Load
+    // ========================
+    window.addEventListener("load", () => {
         getUserLocation((location) => {
             console.log("Final location to use:", location);
-
-            // Update DOM element with id "user-location"
             const locationDiv = document.getElementById("user-location");
             if (locationDiv) {
                 locationDiv.textContent = `Latitude: ${location.latitude}, Longitude: ${location.longitude}`;
             }
         });
 
-        // Other page load functions
         loadCartCount();
         updateAuthButton();
         loadBestSellingProducts();
         setupCartLink();
-        setupSearch();
     });
-
-
 </script>
+
 
 
 
